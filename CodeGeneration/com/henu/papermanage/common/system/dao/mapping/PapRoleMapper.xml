@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.papermanage.common.system.dao.PapRoleMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.henu.papermanage.common.system.model.PapRole">
+		<id column="role_id" property="roleId" />
+		<result column="role_name" property="roleName" />
+		<result column="role_sign" property="roleSign" />
+		<result column="remark" property="remark" />
+		<result column="user_id_create" property="userIdCreate" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        role_id AS roleId, role_name AS roleName, role_sign AS roleSign, remark, user_id_create AS userIdCreate, create_time AS createTime, modify_time AS modifyTime
+    </sql>
+
+</mapper>

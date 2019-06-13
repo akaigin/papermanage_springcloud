@@ -1,0 +1,44 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+server:
+  port: 8002
+spring:
+  application:
+    name: zuul
+  servlet:
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 100Mb
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8005/oauth/token #指定获取access token的URI.
+      user-authorization-uri: http://localhost:8005/oauth/authorize #用户跳转去获取access token的URI.
+      client-id: app #指定OAuth2 client ID.
+    resource:
+      user-info-uri: http://localhost:8005/user #指定user info的URI
+      prefer-token-info: false #是否使用token info，默认为true
+#饥饿加载，防止初次创建RibbonClient时间过长导致崩溃
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    api-admin:
+      path: /api-admin/**
+      serviceId: api-admin
+    api-base:
+      path: /api-base/**
+      serviceId: api-base
+    api-cms:
+      path: /api-cms/**
+      serviceId: api-cms
+  #让所有路由配置均维护在配置文件中，以达到网关启动的时候就默认初始化好各个路由转发的负载均衡对象
+  ignored-services: api-admin, api-base, api-cms
+
+

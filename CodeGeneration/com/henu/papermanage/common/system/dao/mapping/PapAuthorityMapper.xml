@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.papermanage.common.system.dao.PapAuthorityMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.henu.papermanage.common.system.model.PapAuthority">
+		<id column="authority_id" property="authorityId" />
+		<result column="parent_id" property="parentId" />
+		<result column="name" property="name" />
+		<result column="url" property="url" />
+		<result column="perms" property="perms" />
+		<result column="type" property="type" />
+		<result column="icon" property="icon" />
+		<result column="order_num" property="orderNum" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        authority_id AS authorityId, parent_id AS parentId, name, url, perms, type, icon, order_num AS orderNum, create_time AS createTime, modify_time AS modifyTime
+    </sql>
+
+</mapper>
