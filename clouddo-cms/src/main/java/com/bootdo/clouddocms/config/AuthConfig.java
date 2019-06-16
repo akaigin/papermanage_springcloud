@@ -21,7 +21,7 @@ public class AuthConfig implements WebMvcConfigurer {
 
         // 排除配置
         addInterceptor.excludePathPatterns("/error");
-        addInterceptor.excludePathPatterns("/files/**");
+        addInterceptor.excludePathPatterns("/file/**");
 
         // 拦截配置
         addInterceptor.addPathPatterns("/**");

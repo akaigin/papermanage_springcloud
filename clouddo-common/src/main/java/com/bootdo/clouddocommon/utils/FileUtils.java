@@ -1,5 +1,7 @@
 package com.bootdo.clouddocommon.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,5 +56,31 @@ public class FileUtils {
 
     public static String renameToUUID(String fileName) {
         return UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+    /**
+     * <B>方法名称：</B>获取文件后缀名<BR>
+     * <B>概要说明：</B>获取文件后缀名<BR>
+     * @param fileName
+     * @return  如："jpg"、"txt"、"zip" 等
+     */
+    public static String getFileExt(String fileName) {
+        if (StringUtils.isBlank(fileName) || !fileName.contains(".")) {
+            return "";
+        } else {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        }
+    }
+    /**
+     * <B>方法名称：</B>获取文件名<BR>
+     * <B>概要说明：</B>获取文件名<BR>
+     * @param path
+     * @return
+     */
+    public static String getOriginalFilename(String fileName) {
+        if (StringUtils.isBlank(fileName) || !fileName.contains(".")) {
+            return "";
+        } else {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        }
     }
 }

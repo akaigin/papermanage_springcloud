@@ -1,13 +1,14 @@
 package com.bootdo.clouddocms.controller;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.io.*;
+import java.util.*;
 
+import com.bootdo.clouddocms.fastdfs.FastDFSClient;
+import com.bootdo.clouddocms.utils.FastDFSClientUtils;
 import com.bootdo.clouddocommon.context.FilterContextHandler;
 import com.bootdo.clouddocommon.utils.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -23,6 +24,8 @@ import com.bootdo.clouddocommon.utils.Query;
 import com.bootdo.clouddocommon.utils.ResultBean;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * 文件上传
  *
@@ -34,11 +37,17 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/file")
 public class FileController {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
     @Value("${app.filePath}")
     String filePath;
 
     @Value("${app.pre}")
     String filePre;
+
+    @Autowired
+    FastDFSClient fastDFSClient;
 
     @Autowired
     private FileService fileService;
@@ -51,23 +60,81 @@ public class FileController {
 
     @GetMapping("getToken")
     public ResultBean getToken() {
-        return ResultBean.ok().put("token", FilterContextHandler.getToken()).put("url", "http://localhost:8002/api-cms/file/upload")
-                .put("key", UUID.randomUUID().toString());
+        return ResultBean.ok().put("url", "http://localhost:8002/api-cms/file/upload");
     }
 
     @PostMapping("upload")
-    public ResultBean upload(MultipartFile file, String key) {
-        try {
-            String resPath = FileUtils.saveFile(file.getBytes(), filePath, key);
+    public ResultBean upload(MultipartFile file) {
+        /*try {
+            *//*String resPath = FileUtils.saveFile(file.getBytes(), filePath, key);
             fileService.save(new FileDO() {{
                 setCreateDate(new Date());
                 setUrl("http://localhost:8004" + filePre + "/"+resPath);
                 setType(1);
             }});
-            return ResultBean.ok().put("resPath", resPath);
+            return ResultBean.ok().put("resPath", resPath);*//*
+            String fileRealName = file.getOriginalFilename();//获得原始文件名;
+            int random = (int) (Math.random() * 100 + 1);
+            int random1 = (int) (Math.random() * 100 + 1);
+            filePath = filePath + random + File.separator + random1 + File.separator + fileRealName;
+            File savedFile = new File(filePath);
+            boolean isCreateSuccess = savedFile.createNewFile(); // 是否创建文件成功
+            if(isCreateSuccess){      //将文件写入
+                file.transferTo(savedFile);
+            }
+            String fileId = FastDFSClientUtils.upload(savedFile, filePath);
+            logger.info("本地文件：" + fileRealName + "，上传成功！ 文件ID为：" + fileId);
+            return ResultBean.ok().put("fileId",fileId);
         } catch (IOException e) {
             e.printStackTrace();
             return ResultBean.error("文件上传失败");
+        }*/
+        logger.info("lige1:" + file.toString());
+
+        if (file != null && !file.isEmpty())
+        {
+            try
+            {
+
+                String path = fastDFSClient.uploadFile(file.getBytes(), file.getOriginalFilename());
+
+                return ResultBean.ok().put("resPath",path);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return ResultBean.error("文件上传失败");
+            }
+        }
+        else
+        {
+            return ResultBean.error("参数丢失");
+        }
+    }
+
+    @PostMapping("download")
+    public void download(HttpServletResponse response, String path){
+        try{
+            // 判断文件是否存在
+            if (fastDFSClient.getFileInfo(path) != null)
+            {
+                byte[] buffer = fastDFSClient.downloadFile(path);
+                // 清空response
+                response.reset();
+                // 设置response的Header
+                response.addHeader("Content-Disposition",
+                        "attachment;filename=" + FileUtils.getOriginalFilename(path));
+                response.addHeader("Content-Length", "" + buffer.length);
+                // 通过文件流的形式写到客户端
+                OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+                response.setContentType("application/octet-stream");
+                toClient.write(buffer);
+                // 写完以后关闭文件流
+                toClient.flush();
+                toClient.close();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
