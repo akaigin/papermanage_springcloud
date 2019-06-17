@@ -1,9 +1,9 @@
 package demo.convert;
 import java.util.List;
-import com.bootdo.clouddoadmin.domain.UserDO;
+import com.henu.paperadmin.domain.UserDO;
 import java.lang.Long;
 import java.util.Date;
-import com.bootdo.clouddoadmin.dto.UserDTO;
+import com.henu.paperadmin.dto.UserDTO;
 import java.lang.String;
 import long;
 import java.util.ArrayList;

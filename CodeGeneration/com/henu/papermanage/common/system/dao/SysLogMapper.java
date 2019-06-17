@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-12
+ * @since 2019-06-16
  */
 public interface SysLogMapper extends BaseMapper<SysLog> {
 

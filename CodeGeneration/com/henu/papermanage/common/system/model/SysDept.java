@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-12
+ * @since 2019-06-16
  */
 @TableName("sys_dept")
 public class SysDept extends Model<SysDept> {

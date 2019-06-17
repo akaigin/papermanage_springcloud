@@ -2,9 +2,9 @@ package demo.convert;
 import java.util.List;
 import java.lang.Long;
 import java.util.Date;
-import com.bootdo.clouddoadmin.dto.UserDTO;
+import com.henu.paperadmin.dto.UserDTO;
 import java.lang.String;
-import com.bootdo.clouddoadmin.domain.UserMO;
+import com.henu.paperadmin.domain.UserMO;
 import long;
 import java.util.ArrayList;
 /**

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-12
+ * @since 2019-06-16
  */
 public interface SysDictService extends IService<SysDict> {
 	

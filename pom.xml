@@ -4,20 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.bootdo</groupId>
-    <artifactId>clouddo</artifactId>
+    <groupId>com.henu</groupId>
+    <artifactId>paper</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
     </properties>
     <modules>
-        <module>clouddo-common</module>
-        <module>clouddo-server</module>
-        <module>clouddo-zuul</module>
-        <module>clouddo-admin</module>
-        <module>clouddo-cms</module>
-        <module>clouddo-base</module>
+        <module>paper-common</module>
+        <module>paper-server</module>
+        <module>paper-zuul</module>
+        <module>paper-admin</module>
+        <module>paper-file</module>
+        <module>paper-base</module>
     </modules>
     <repositories>
         <repository>

@@ -1,0 +1,40 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+server:
+  port: 8004
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: api-cms
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/paper?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 100Mb
+mybatis:
+  mapper-locations: mapper/**Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true
+app:
+  filePath: c:/var/uploaded_files/
+  pre: /files
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8005/oauth/token
+      user-authorization-uri: http://localhost:8005/oauth/authorize
+      client-id: app
+      #clientAuthenticationScheme: form
+    resource:
+      user-info-uri: http://localhost:8005/user/tokenUser
+      #token-info-uri: http://localhost:8005/oauth/check_token
+      prefer-token-info: false
