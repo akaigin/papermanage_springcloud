@@ -2,13 +2,11 @@ server:
   port: 8001
 
 eureka:
-  instance:
-    hostname: localhost
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://localhost:${server.port}/eureka/
 #饥饿加载，防止初次创建RibbonClient时间过长导致崩溃
 ribbon:
   eager-load:

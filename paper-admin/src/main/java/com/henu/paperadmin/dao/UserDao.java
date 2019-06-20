@@ -22,7 +22,7 @@ public interface UserDao{
 
 	UserDO get(Long userId);
 
-	List<UserMO> getUserList(@Param("query") Map<String,Object> map, Long roleId);
+	List<UserMO> getUserList(@Param("query") Map<String,Object> map, @Param("roleId") Long roleId);
 
 	List<UserMO> getUser(Map<String, Object> map);
 

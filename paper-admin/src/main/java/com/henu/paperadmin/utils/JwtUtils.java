@@ -2,7 +2,7 @@
 //
 //import com.henu.paperadmin.constants.constants;
 //import com.henu.paperadmin.vo.UserToken;
-//import com.netflix.discovery.CommonConstants;
+//import com.netflix.localhost.CommonConstants;
 //import io.jsonwebtoken.Claims;
 //import io.jsonwebtoken.Jws;
 //import io.jsonwebtoken.Jwts;
