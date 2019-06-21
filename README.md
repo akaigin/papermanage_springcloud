@@ -4,18 +4,31 @@
    
 ### 所用技术
 后端：
+
    springcloud（eureka+zuul）
+   
    springMVC
+   
    springboot
+   
    mybatis
+   
    mybatis-plus自动生成代码
-   Oauth2
+   
+   Oauth2安全框架
+   
    druid数据库连接池
+   
    全局异常捕捉处理（ExceptionHandler）
-   fastDFS
-   docker
+   
+   fastDFS分布式文件系统
+   
+   docker部署
+   
 前端：
+
    vue
+   
    Element UI
 
 ### 使用说明
@@ -37,6 +50,6 @@
 
 8.启动paper-file 文件上传下载微服务
 
-9.启动前端项目 https://gitee.com/lcg0124/paper-view.git
+9.启动前端项目 https://github.com/akaigin/paper_springcloud_vuefont
 ### 系统截图
 ![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/login.png "屏幕截图.png")
