@@ -4,18 +4,32 @@
    
 ### 所用技术
 后端：
+
    springcloud（eureka+zuul）
+   
    springMVC
+   
    springboot
+   
    mybatis
+   
    mybatis-plus自动生成代码
-   Oauth2
+   
+   Oauth2安全框架
+   
    druid数据库连接池
+   
    全局异常捕捉处理（ExceptionHandler）
-   fastDFS
-   docker
+   
+   fastDFS分布式文件系统实现上传下载
+   
+   docker部署
+   
+   redis作二级缓存
 前端：
+
    vue
+   
    Element UI
 
 ### 使用说明
@@ -33,10 +47,21 @@
 
 6.启动paper-base 系统日志管理微服务
 
-7.启动paper-admin 权限微服务
+7.启动paper-admin 用户权限微服务
 
 8.启动paper-file 文件上传下载微服务
 
-9.启动前端项目 https://gitee.com/lcg0124/paper-view.git
+9.启动前端项目 https://github.com/akaigin/paper_springcloud_vuefont
 ### 系统截图
-![输入图片说明](https://gitee.com/uploads/images/2018/0525/154945_23b93b75_1204498.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/login.png "屏幕截图.png")
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/dashboard.png "屏幕截图.png")
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/info.png "屏幕截图.png")
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/studentList.png "屏幕截图.png")
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/role.png "屏幕截图.png")
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/plan.png "屏幕截图.png")
+
