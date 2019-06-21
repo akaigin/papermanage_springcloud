@@ -6,36 +6,37 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class PlanDTO {
 
-    private static final long serialVersionUID = 1L;
+     static final long serialVersionUID = 1L;
 
-    private Long id;
+     Long id;
     /**
      * 计划说明
      */
-    private String description;
+     String description;
     /**
      * 对应角色
      */
-    private Long roleId;
+     List<Long> roleId;
     /**
      * 文件存储地址
      */
-    private String filePath;
+     String filePath;
     /**
      * 上传时间
      */
-    private Date createTime;
+     Date createTime;
     /**
      * 修改时间
      */
-    private Date modifyTime;
+     Date modifyTime;
     /**
      * 上传者
      */
-    private String createUser;
+     String createUser;
 
 
     public Long getId() {
@@ -54,11 +55,11 @@ public class PlanDTO {
         this.description = description;
     }
 
-    public Long getRoleId() {
+    public List<Long> getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(List<Long> roleId) {
         this.roleId = roleId;
     }
 

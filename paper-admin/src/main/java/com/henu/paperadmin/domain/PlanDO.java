@@ -25,11 +25,6 @@ public class PlanDO extends Model<PlanDO> {
      */
     private String description;
     /**
-     * 对应角色
-     */
-    @TableField("role_id")
-    private Long roleId;
-    /**
      * 文件存储地址
      */
     @TableField("file_path")
@@ -65,14 +60,6 @@ public class PlanDO extends Model<PlanDO> {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
     }
 
     public String getFilePath() {
@@ -117,7 +104,6 @@ public class PlanDO extends Model<PlanDO> {
         return "PapPlan{" +
                 ", id=" + id +
                 ", description=" + description +
-                ", roleId=" + roleId +
                 ", filePath=" + filePath +
                 ", createTime=" + createTime +
                 ", modifyTime=" + modifyTime +

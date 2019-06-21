@@ -1,7 +1,6 @@
 package com.henu.paperadmin.service;
 
 import com.henu.paperadmin.domain.Tree;
-import com.henu.paperadmin.domain.DeptDO;
 import com.henu.paperadmin.domain.UserDO;
 import com.henu.paperadmin.domain.UserMO;
 import com.henu.paperadmin.dto.UserDTO;
@@ -41,8 +40,8 @@ public interface UserService {
 	Set<String> listRoles(Long userId);
 
 	int resetPwd(UserVO userVO, UserDO userDO) throws Exception;
+
 	int adminResetPwd(UserVO userVO) throws Exception;
-	Tree<DeptDO> getTree();
 
 	/**
 	 * 更新个人信息

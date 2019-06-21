@@ -12,9 +12,9 @@ public interface PlanService {
 
     int count(Map<String,Object> map);
 
-    int save(PlanDO user);
+    int save(PlanDTO user);
 
-    int update(PlanDO user);
+    int update(PlanDTO user);
 
     int remove(Long userId);
     

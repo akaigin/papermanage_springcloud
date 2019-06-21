@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.henu.paperadmin.dao.PlanRoleDao">
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+        id, role_id AS roleId, plan_id AS planId
+    </sql>
+
+	<insert id="batchSave">
+		INSERT INTO pap_plan_role(plan_id, role_id) values
+		<foreach item="item" index="index" collection="list"
+			separator=",">
+			(#{item.planId},#{item.roleId})
+		</foreach>
+	</insert>
+</mapper>

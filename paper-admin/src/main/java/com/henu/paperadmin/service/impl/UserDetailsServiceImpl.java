@@ -4,7 +4,6 @@ import com.henu.paperadmin.dao.UserDao;
 import com.henu.paperadmin.domain.UserMO;
 import com.henu.paperadmin.secuity.CurrentUser;
 import com.henu.paperadmin.service.AuthorityService;
-import com.henu.paperadmin.service.MenuService;
 import com.henu.papercommon.exception.CDException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,8 +20,6 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserDao userDao;
-    @Autowired
-    MenuService menuService;
     @Autowired
     AuthorityService authorityService;
 

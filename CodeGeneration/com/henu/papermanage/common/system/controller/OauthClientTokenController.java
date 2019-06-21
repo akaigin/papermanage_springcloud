@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-16
+ * @since 2019-06-21
  */
 @Controller
 @RequestMapping("/oauthClientToken")

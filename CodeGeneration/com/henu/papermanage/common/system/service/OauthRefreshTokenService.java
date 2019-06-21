@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-16
+ * @since 2019-06-21
  */
 public interface OauthRefreshTokenService extends IService<OauthRefreshToken> {
 	

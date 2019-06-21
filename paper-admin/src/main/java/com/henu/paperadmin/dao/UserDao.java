@@ -29,7 +29,9 @@ public interface UserDao{
 	List<UserDO> list(Map<String, Object> map);
 
 	int countByRoleId(Map<String,Object> map,Long roleId);
-	
+
+	Long getUserIdByUserName(String userName);
+
 	int count(Map<String, Object> map);
 	
 	int save(UserDO user);

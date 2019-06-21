@@ -1,7 +1,6 @@
 package com.henu.paperadmin.service.impl;
 
 import com.henu.paperadmin.dao.RoleDao;
-import com.henu.paperadmin.dao.RoleMenuDao;
 import com.henu.paperadmin.dao.UserDao;
 import com.henu.paperadmin.dao.UserRoleDao;
 import com.henu.paperadmin.domain.RoleDO;
@@ -24,8 +23,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     RoleDao roleMapper;
-    @Autowired
-    RoleMenuDao roleMenuMapper;
     @Autowired
     UserDao userMapper;
     @Autowired
@@ -86,11 +83,17 @@ public class RoleServiceImpl implements RoleService {
         return count;
     }
 
+   /* @Transactional
+    @Override
+    public int saveUserRole(Long user_id,Long role_id) {
+        int count = .remove(id);
+        return count;
+    }*/
+
     @Transactional
     @Override
     public int remove(Long id) {
         int count = roleMapper.remove(id);
-        roleMenuMapper.removeByRoleId(id);
         return count;
     }
 

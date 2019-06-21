@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-16
+ * @since 2019-06-21
  */
 @TableName("pap_user_role")
 public class PapUserRole extends Model<PapUserRole> {

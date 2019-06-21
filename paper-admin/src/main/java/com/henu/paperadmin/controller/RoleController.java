@@ -46,16 +46,20 @@ public class RoleController {
         return roleService.RoleIdsByUserId(userId);
     }
 
+    @ApiOperation("增加角色")
+    @Log("增加角色")
     @PostMapping
-    ResultBean save(@RequestBody RoleDO roleDO){
+    ResultBean save(@ApiParam(name="roleDO", value = "角色相关信息")  @RequestBody RoleDO roleDO){
         if(roleService.save(roleDO)>0){
             return ResultBean.ok();
         }
         return ResultBean.error();
     }
 
+    @ApiOperation("更新角色")
+    @Log("更新角色")
     @PutMapping
-    ResultBean update(@RequestBody RoleDO roleDO){
+    ResultBean update(@ApiParam(name="roleDO", value = "角色相关信息") @RequestBody RoleDO roleDO){
         if(roleService.update(roleDO)>0){
             return ResultBean.ok();
         }

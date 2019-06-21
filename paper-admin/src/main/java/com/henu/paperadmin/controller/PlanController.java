@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/plan")
+@RequestMapping("/planDO")
 @RestController
 @Api("计划安排操作接口")
 public class PlanController {
@@ -47,22 +47,28 @@ public class PlanController {
     }
     /**
      * 增加计划安排
-     * @param plan
+     * @param planDO
      * @return
      */
+    //@PreAuthorize("hasAuthority('admin:role:add')")
+    @ApiOperation("增加计划安排")
+    @Log("增加计划安排")
     @PostMapping()
-    ResultBean save(@RequestBody PlanDO plan) {
-        return ResultBean.operate(planService.save(plan) > 0);
+    ResultBean save(@ApiParam(name="planDTO", value = "教学安排相关信息") @RequestBody PlanDTO planDTO) {
+        return ResultBean.operate(planService.save(planDTO) > 0);
     }
 
     /**
      * 修改计划安排
-     * @param plan
+     * @param planDO
      * @return
      */
+    //@PreAuthorize("hasAuthority('admin:role:update')")
+    @ApiOperation("修改计划安排")
+    @Log("修改计划安排")
     @PutMapping()
-    public ResultBean update(@RequestBody PlanDO plan) {
-        return ResultBean.operate(planService.update(plan) > 0);
+    public ResultBean update(@ApiParam(name="planDTO", value = "教学安排相关信息") @RequestBody PlanDTO planDTO) {
+        return ResultBean.operate(planService.update(planDTO) > 0);
     }
 
 
@@ -71,8 +77,11 @@ public class PlanController {
      * @param id
      * @return
      */
+    //@PreAuthorize("hasAuthority('admin:role:delete')")
+    @ApiOperation("删除计划安排")
+    @Log("删除计划安排")
     @DeleteMapping()
-    ResultBean remove( Long id) {
+    ResultBean remove(@ApiParam(name="id", value = "计划ID") @RequestBody Long id) {
         return ResultBean.operate (planService.remove(id) > 0);
     }
 }

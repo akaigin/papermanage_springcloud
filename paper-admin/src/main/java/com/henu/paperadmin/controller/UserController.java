@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -84,9 +85,13 @@ public class UserController extends BaseController {
 	 * @param user
 	 * @return
 	 */
+	@ApiOperation("增加用户")
+	@Log("增加用户")
 	@PostMapping()
-    ResultBean save(@RequestBody UserDTO user) {
+    ResultBean save(@ApiParam(name="user",value = "用户相关信息") @RequestBody UserDTO user) {
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+		user.setCreateTime(new Date());
+		user.setStatus("1");
 		return ResultBean.operate(userService.save(user) > 0);
 	}
 
@@ -95,8 +100,11 @@ public class UserController extends BaseController {
 	 * @param user
 	 * @return
 	 */
+	@ApiOperation("修改用户")
+	@Log("修改用户")
 	@PutMapping()
-	public ResultBean update(@RequestBody UserDTO user) {
+	public ResultBean update(@ApiParam(name="user",value = "用户相关信息") @RequestBody UserDTO user) {
+		user.setModifyTime(new Date());
 		return ResultBean.operate(userService.update(user) > 0);
 	}
 
@@ -106,8 +114,10 @@ public class UserController extends BaseController {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation("删除用户")
+	@Log("删除用户")
 	@DeleteMapping()
-	ResultBean remove( Long id) {
+	ResultBean remove(@ApiParam(name="id",value = "用户ID") @RequestBody Long id) {
 		return ResultBean.operate (userService.remove(id) > 0);
 	}
 

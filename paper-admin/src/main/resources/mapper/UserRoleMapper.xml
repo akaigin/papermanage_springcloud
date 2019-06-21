@@ -9,7 +9,7 @@
 	
 	<select id="get" resultType="com.henu.paperadmin.domain.UserRoleDO">
 		select `id`,`user_id`,`role_id` from
-		sys_user_role where id = #{value}
+		pap_user_role where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.henu.paperadmin.domain.UserRoleDO">
@@ -35,7 +35,7 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from sys_user_role
+		select count(*) from pap_user_role
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
@@ -58,7 +58,7 @@
 	</insert>
 
 	<update id="update" parameterType="com.henu.paperadmin.domain.UserRoleDO">
-		update sys_user_role
+		update pap_user_role
 		<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="roleId != null">`role_id` = #{roleId}</if>
@@ -67,11 +67,11 @@
 	</update>
 
 	<delete id="remove">
-		delete from sys_user_role where id = #{value}
+		delete from pap_user_role where id = #{value}
 	</delete>
 
 	<delete id="batchRemove">
-		delete from sys_user_role where id in
+		delete from pap_user_role where id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">
 			#{id}
@@ -80,7 +80,7 @@
 
 	<select id="listRoleId" resultType="long">
 		select role_id from
-		sys_user_role where
+		pap_user_role where
 		user_id=#{userId}
 	</select>
 
@@ -89,7 +89,7 @@
 	</delete>
 
 	<delete id="batchRemoveByUserId">
-		delete from sys_user_role where user_id in
+		delete from pap_user_role where user_id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">
 			#{id}
@@ -97,7 +97,7 @@
 	</delete>
 
 	<insert id="batchSave">
-		INSERT INTO user_role(user_id, role_id) values
+		INSERT INTO pap_user_role(user_id, role_id) values
 		<foreach item="item" index="index" collection="list"
 			separator=",">
 			(#{item.userId},#{item.roleId})
