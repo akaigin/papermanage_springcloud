@@ -21,10 +21,11 @@
    
    全局异常捕捉处理（ExceptionHandler）
    
-   fastDFS分布式文件系统
+   fastDFS分布式文件系统实现上传下载
    
    docker部署
    
+   redis作二级缓存
 前端：
 
    vue
