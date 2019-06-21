@@ -39,4 +39,4 @@
 
 9.启动前端项目 https://gitee.com/lcg0124/paper-view.git
 ### 系统截图
-![输入图片说明](https://gitee.com/uploads/images/2018/0525/154945_23b93b75_1204498.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/login.png "屏幕截图.png")
