@@ -22,6 +22,14 @@ public class PlanDTO {
      */
      List<Long> roleId;
     /**
+     * 对应角色
+     */
+    String roleNames;
+    /**
+     * 文件名
+     */
+    String fileName;
+    /**
      * 文件存储地址
      */
      String filePath;
@@ -61,6 +69,22 @@ public class PlanDTO {
 
     public void setRoleId(List<Long> roleId) {
         this.roleId = roleId;
+    }
+
+    public String getRoleNames() {
+        return roleNames;
+    }
+
+    public void setRoleNames(String roleNames) {
+        this.roleNames = roleNames;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getFilePath() {

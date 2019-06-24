@@ -156,7 +156,7 @@
 	</update>
 	
 	<delete id="remove">
-		delete from pap_user where user_id = #{value}
+		delete from pap_user where id = #{userId}
 	</delete>
 	
 	<delete id="batchRemove">

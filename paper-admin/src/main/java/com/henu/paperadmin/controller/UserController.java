@@ -117,7 +117,7 @@ public class UserController extends BaseController {
 	@ApiOperation("删除用户")
 	@Log("删除用户")
 	@DeleteMapping()
-	ResultBean remove(@ApiParam(name="id",value = "用户ID") @RequestBody Long id) {
+	ResultBean remove(@ApiParam(name="id",value = "用户ID")  Long id) {
 		return ResultBean.operate (userService.remove(id) > 0);
 	}
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface PlanService {
-    List<PlanDO> list(Map<String,Object> query, UserDO userDO);
+    List<PlanDTO> list(Map<String,Object> query, PlanDO planDO);
 
     int count(Map<String,Object> map);
 

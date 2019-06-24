@@ -14,6 +14,13 @@
 		from sys_role where role_id = #{value}
 	</select>
 
+	<select id="getRoleNamesByRoleIds" parameterType="java.util.List" resultType="string">
+		select role_name from pap_role where role_id in
+		<foreach collection="roleIds" index="index" item="item" open="("
+				 separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 	<select id="list" resultType="com.henu.paperadmin.domain.RoleDO">
 		select
 		<include refid="Base_Column_List"></include>

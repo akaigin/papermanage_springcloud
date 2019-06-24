@@ -21,6 +21,8 @@ public class FileDTO implements Serializable {
 	private Integer type;
 	//URL地址
 	private String url;
+
+	private String filePath;
 	//创建时间
 	private Date createDate;
 
@@ -71,5 +73,13 @@ public class FileDTO implements Serializable {
 	 */
 	public Date getCreateDate() {
 		return createDate;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 }

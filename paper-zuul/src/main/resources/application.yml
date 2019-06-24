@@ -2,6 +2,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8001/eureka/
+    registry-fetch-interval-seconds: 5
 server:
   port: 8002
 spring:
@@ -40,5 +41,7 @@ zuul:
       serviceId: api-cms
   #让所有路由配置均维护在配置文件中，以达到网关启动的时候就默认初始化好各个路由转发的负载均衡对象
   ignored-services: api-admin, api-base, api-cms
+
+
 
 

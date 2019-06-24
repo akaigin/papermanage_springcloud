@@ -11,4 +11,8 @@ public interface PlanRoleDao {
     int batchSave(List<PlanRoleDO> list);
 
     int batchUpdate(List<PlanRoleDO> list);
+
+    List<Long> getRoleIdsByPlanId(Long planId);
+
+    int remove(Long planId);
 }

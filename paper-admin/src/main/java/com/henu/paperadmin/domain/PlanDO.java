@@ -25,6 +25,11 @@ public class PlanDO extends Model<PlanDO> {
      */
     private String description;
     /**
+     * 文件名
+     */
+    @TableField("file_name")
+    private String fileName;
+    /**
      * 文件存储地址
      */
     @TableField("file_path")
@@ -60,6 +65,14 @@ public class PlanDO extends Model<PlanDO> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getFilePath() {
@@ -104,6 +117,7 @@ public class PlanDO extends Model<PlanDO> {
         return "PapPlan{" +
                 ", id=" + id +
                 ", description=" + description +
+                ", fileName=" + fileName +
                 ", filePath=" + filePath +
                 ", createTime=" + createTime +
                 ", modifyTime=" + modifyTime +

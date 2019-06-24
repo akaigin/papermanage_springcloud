@@ -1,6 +1,7 @@
 package com.henu.paperfile.controller;
 
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.*;
 
 import com.henu.paperfile.fastdfs.FastDFSClient;
@@ -35,12 +36,6 @@ import javax.servlet.http.HttpServletResponse;
 public class FileController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-
-    @Value("${app.filePath}")
-    String filePath;
-
-    @Value("${app.pre}")
-    String filePre;
 
     @Autowired
     FastDFSClient fastDFSClient;
@@ -93,8 +88,10 @@ public class FileController {
             {
 
                 String path = fastDFSClient.uploadFile(file.getBytes(), file.getOriginalFilename());
-
-                return ResultBean.ok().put("resPath",path);
+                Map<String,Object> map=new HashMap<>() ;
+                map.put("resPath",path);
+                map.put("fileName",file.getOriginalFilename());
+                return ResultBean.data(map);
             }
             catch (Exception e)
             {
@@ -109,17 +106,18 @@ public class FileController {
     }
 
     @PostMapping("download")
-    public void download(HttpServletResponse response, String path){
+    public void download(String filePath,String fileName,HttpServletResponse response){
         try{
             // 判断文件是否存在
-            if (fastDFSClient.getFileInfo(path) != null)
+            if (fastDFSClient.getFileInfo(filePath) != null)
             {
-                byte[] buffer = fastDFSClient.downloadFile(path);
+                byte[] buffer = fastDFSClient.downloadFile(filePath);
                 // 清空response
                 response.reset();
+                response.setCharacterEncoding("UTF-8");
                 // 设置response的Header
                 response.addHeader("Content-Disposition",
-                        "attachment;filename=" + FileUtils.getOriginalFilename(path));
+                        "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
                 response.addHeader("Content-Length", "" + buffer.length);
                 // 通过文件流的形式写到客户端
                 OutputStream toClient = new BufferedOutputStream(response.getOutputStream());

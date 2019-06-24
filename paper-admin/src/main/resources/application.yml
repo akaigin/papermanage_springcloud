@@ -7,7 +7,21 @@ eureka:
 #    enabled: false
 server:
   port: 8005
+
+logging:
+  level.root: info
+  level.com.henu: debug
+  path: logs/
+  file: papermanage.log
+  config: classpath:logback-spring.xml
+  level:
+    org:
+      springframework:
+        web: debug
+
 spring:
+  profiles:
+    active: dev
   application:
     name: api-admin
   datasource:
@@ -48,14 +62,18 @@ spring:
     host: 127.0.0.1
     port: 6379
     timeout: 500
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      concurrency: 10
+      max-concurrency: 20
+      prefetch: 5
 
 mybatis:
   mapper-locations: mapper/**Mapper.xml
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-logging:
-  level.root: info
-  level.com.henu: debug
-  path: logs/
-  file: papermanage.log

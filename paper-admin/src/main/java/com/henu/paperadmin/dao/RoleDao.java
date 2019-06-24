@@ -2,6 +2,7 @@ package com.henu.paperadmin.dao;
 
 import com.henu.paperadmin.domain.RoleDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,9 @@ import java.util.Map;
 public interface RoleDao {
 
 	RoleDO get(Long roleId);
-	
+
+	List<String> getRoleNamesByRoleIds(@Param("roleIds") List<Long> roleIds);
+
 	List<RoleDO> list(Map<String, Object> map);
 
 	int count(Map<String, Object> map);

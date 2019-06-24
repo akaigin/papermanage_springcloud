@@ -14,4 +14,14 @@
 			(#{item.planId},#{item.roleId})
 		</foreach>
 	</insert>
+
+	<select id="getRoleIdsByPlanId" resultType="Long">
+		select role_id from pap_plan_role
+		where plan_id=#{planId}
+	</select>
+
+	<delete id="remove">
+		delete from pap_plan_role
+		where plan_id=#{planId}
+	</delete>
 </mapper>
