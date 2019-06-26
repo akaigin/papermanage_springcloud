@@ -36,7 +36,6 @@ public class UserController extends BaseController {
 	UserService userService;
     @Autowired
 	RoleService roleService;
-
 	/**
 	 * 登录的当前用户，前台需要验证用户登录的页面可以调用此方法
 	 * @return

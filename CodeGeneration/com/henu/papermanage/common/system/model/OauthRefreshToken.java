@@ -11,7 +11,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-21
+ * @since 2019-06-26
  */
 @TableName("oauth_refresh_token")
 public class OauthRefreshToken extends Model<OauthRefreshToken> {

@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-21
+ * @since 2019-06-26
  */
 @TableName("oauth_client_token")
 public class OauthClientToken extends Model<OauthClientToken> {

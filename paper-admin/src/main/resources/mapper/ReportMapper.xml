@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.henu.paperadmin.dao.ReportDao">
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, description, file_name AS fileName, file_path AS filePath, create_time AS createTime, modify_time AS modifyTime, status, guidance, create_user AS createUser
+    </sql>
+
+    <select id="list" resultType="com.henu.paperadmin.domain.ReportDO">
+        select
+        <include refid="Base_Column_List"></include>
+        from pap_report
+        <where>
+            <if test="report.id != null and report.id != ''"> and id = #{report.id} </if>
+            <if test="report.description != null and report.description != ''"> and description = #{report.description} </if>
+            <if test="report.createUser != null and report.createUser != ''"> and create_user = #{report.createUser} </if>
+            <if test="query.name != null and query.name != ''"> and concat(description,file_name,create_time,create_user) like '%${query.name}%' </if>
+        </where>
+        <choose>
+            <when test="query.sort != null and query.sort.trim() != ''">
+                order by ${query.sort} ${query.order}
+            </when>
+            <otherwise>
+                order by id asc
+            </otherwise>
+        </choose>
+        <if test="query.offset != null and query.limit != null">
+            limit #{query.offset}, #{query.limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from pap_report
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+            <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.henu.paperadmin.domain.ReportDO"
+            useGeneratedKeys="true" keyProperty="id">
+		insert into pap_report
+		(
+		`description`,
+		`file_name`,
+		`file_path`,
+		`create_time`,
+		`modify_time`,
+		`create_user`,
+		`guidance`,
+		`status`
+		)
+		values
+		(
+		#{description},
+		#{fileName},
+		#{filePath},
+		#{createTime},
+		#{modifyTime},
+		#{createUser},
+		#{guidance},
+		#{status}
+		)
+	</insert>
+
+    <delete id="remove">
+		delete from pap_report
+		where id = #{reportId}
+	</delete>
+
+    <update id="writeGuidance">
+        update pap_report set
+        `guidance`=#{guidance},
+        `status`=#{status}
+        where id=#{id}
+    </update>
+
+    <select id="getGuidance" resultType="string">
+        select guidance from pap_report
+        where id=#{id}
+    </select>
+</mapper>

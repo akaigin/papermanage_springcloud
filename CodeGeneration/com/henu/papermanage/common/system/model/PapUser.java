@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-21
+ * @since 2019-06-26
  */
 @TableName("pap_user")
 public class PapUser extends Model<PapUser> {

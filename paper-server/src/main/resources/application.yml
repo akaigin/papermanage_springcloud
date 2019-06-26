@@ -16,10 +16,10 @@ eureka:
     #该值至少应该大于leaseRenewalIntervalInSeconds
     lease-expiration-duration-in-seconds: 10 #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
   server:
-    #开启Eureka的自我保护机制
-    enable-self-preservation: true
-    #清理无效节点的时间间隔
-    eviction-interval-timer-in-ms: 5000
+    #设为false，关闭自我保护
+    enableSelfPreservation: false
+    #检测间隔（单位毫秒，默认是1分钟）
+    evictionIntervalTimerInMs: 4000
 #饥饿加载，防止初次创建RibbonClient时间过长导致崩溃
 ribbon:
   eager-load:

@@ -103,4 +103,9 @@
 			(#{item.userId},#{item.roleId})
 		</foreach>
 	</insert>
+
+	<select id="getRoleIdByUserId" resultType="long">
+		select role_id from pap_user_role
+		where user_id=#{userId}
+	</select>
 </mapper>
