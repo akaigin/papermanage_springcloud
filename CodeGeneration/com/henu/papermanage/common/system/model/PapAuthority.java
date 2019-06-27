@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-26
+ * @since 2019-06-27
  */
 @TableName("pap_authority")
 public class PapAuthority extends Model<PapAuthority> {

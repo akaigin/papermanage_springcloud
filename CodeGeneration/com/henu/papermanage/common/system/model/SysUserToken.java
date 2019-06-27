@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-26
+ * @since 2019-06-27
  */
 @TableName("sys_user_token")
 public class SysUserToken extends Model<SysUserToken> {

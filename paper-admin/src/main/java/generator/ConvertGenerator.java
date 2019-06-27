@@ -16,8 +16,8 @@ public class ConvertGenerator {
 
         try {
 
-            Class clazz = Class.forName("com.henu.paperadmin.domain.ArticleDO");//根据类名获得其对应的Class对象 写上你想要的类名就是了 注意是全名 如果有包的话要加上 比如java.Lang.String
-            Class clazzB = Class.forName("com.henu.paperadmin.dto.ArticleDTO");
+            Class clazz = Class.forName("com.henu.paperadmin.domain.CommentDO");//根据类名获得其对应的Class对象 写上你想要的类名就是了 注意是全名 如果有包的话要加上 比如java.Lang.String
+            Class clazzB = Class.forName("com.henu.paperadmin.dto.CommentDTO");
             file = new File("D:\\StudyTools\\IntelliJ IDEA 2019.1.1\\workspace\\Technique\\paper\\CodeGeneration\\convert\\" + firstUpper(clazz.getSimpleName()) + "Convert.java");
             fop = new FileOutputStream(file);
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.henu.paperadmin.dao.CommentDao">
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        comment_id AS commentId, parent_id AS parentId, content, author, like_num AS likeNum, create_time AS createTime, article_id AS articleId, to_who AS toWho
+    </sql>
+
+    <select id="list" resultType="com.henu.paperadmin.domain.CommentDO">
+        select
+        <include refid="Base_Column_List"></include>
+        from pap_comment
+        <where>
+            <if test="comment.commentId != null and comment.commentId != ''"> and comment_id = #{comment.commentId} </if>
+            <if test="comment.parentId != null and comment.parentId != ''"> and parent_id = #{comment.parentId} </if>
+            <if test="comment.author != null and comment.author != ''"> and author = #{comment.author} </if>
+            <if test="comment.articleId != null and comment.articleId != ''"> and article_id = #{comment.articleId} </if>
+            <if test="query.name != null and query.name != ''"> and concat(author,tag) like '%${query.name}%' </if>
+        </where>
+        <choose>
+            <when test="query.sort != null and query.sort.trim() != ''">
+                order by ${query.sort} ${query.order}
+            </when>
+            <otherwise>
+                order by like_num desc
+            </otherwise>
+        </choose>
+        <if test="query.offset != null and query.limit != null">
+            limit #{query.offset}, #{query.limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from pap_comment
+        <where>
+            <if test="commentId != null and commentId != ''"> and comment_id = #{commentId} </if>
+            <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+            <if test="author != null and author != ''"> and author = #{author} </if>
+            <if test="articleId != null and articleId != ''"> and article_id = #{articleId} </if>
+            <if test="name != null and name != ''"> and concat(author,tag) like '%${name}%' </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.henu.paperadmin.domain.CommentDO"
+            useGeneratedKeys="true" keyProperty="commentId">
+		insert into pap_comment
+		(
+		`parent_id`,
+		`content`,
+		`author`,
+		`create_time`,
+		`like_num`,
+		`article_id`,
+		`to_who`
+		)
+		values
+		(
+		#{parentId},
+		#{content},
+		#{author},
+		#{createTime},
+		#{likeNum},
+		#{articleId},
+		#{toWho}
+		)
+	</insert>
+
+    <delete id="remove">
+		delete from pap_comment
+		where comment_id = #{commentId}
+	</delete>
+
+    <update id="updateLikeNumPlus">
+        update pap_comment set like_num=like_num+1
+        where comment_id=#{commentId}
+    </update>
+</mapper>

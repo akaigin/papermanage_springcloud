@@ -40,6 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
             articleDTO.setTitle(articleDOResponse.getTitle());
             articleDTO.setContent(articleDOResponse.getContent());
             articleDTO.setTag(articleDOResponse.getTag());
+            articleDTO.setClick(articleDOResponse.getClick());
             articleDTO.setCreateTime(articleDOResponse.getCreateTime());
             articleDTO.setModifyTime(articleDOResponse.getModifyTime());
             articleDTO.setCreateUser(articleDOResponse.getCreateUser());
