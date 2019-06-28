@@ -26,8 +26,8 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     UserRoleDao userRoleMapper;
     @Override
-    public List<CommentDO> list(Map<String,Object> query, CommentDO commentDO){
-        List<CommentDO> commentDOS=commentMapper.list(query,commentDO);
+    public List<CommentDO> list( CommentDO commentDO){
+        List<CommentDO> commentDOS=commentMapper.list(commentDO);
         return commentDOS;
     }
 

@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface CommentDao {
-    List<CommentDO> list(@Param("query") Map<String, Object> map, @Param("comment") CommentDO commentDO);
+    List<CommentDO> list(CommentDO commentDO);
 
     int count(Map<String, Object> map);
 

@@ -62,7 +62,7 @@
 		#{tag},
 		#{createTime},
 		#{modifyTime},
-		#{click}
+		#{click},
 		#{isSecret},
 		#{createUser}
 		)

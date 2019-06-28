@@ -65,6 +65,7 @@ public class ArticleController {
         articleDTO.setClick(ToolUtils.intToLong(0));
         String createUser=SecuityUtils.getCurrentUser().getName();
         articleDTO.setCreateTime(new Date());
+        articleDTO.setModifyTime(new Date());
         articleDTO.setCreateUser(createUser);
         return ResultBean.operate(articleService.save(articleDTO) > 0);
     }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface CommentService {
-    List<CommentDO> list(Map<String, Object> query, CommentDO commentDO);
+    List<CommentDO> list(CommentDO commentDO);
 
     int count(Map<String, Object> map);
 

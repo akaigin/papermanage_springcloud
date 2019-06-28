@@ -32,14 +32,11 @@ public class CommentController {
     //@PreAuthorize("hasAuthority('admin:comment:comment')")
     @ApiOperation("获取评论列表并分页")
     @Log("获取评论列表")
-    @GetMapping("/list/{articleId}")
-    ResultBean list(@ApiParam(name="params", value = "分页配置相关信息") @RequestParam Map<String, Object> params,
-                    @ApiParam(name="articleId", value = "评论所处文章id") @PathVariable Long articleId) {
-        Query query = new Query(params);
+    @GetMapping("/list")
+    ResultBean list(@ApiParam(name="articleId", value = "评论所处文章id") Long articleId) {
         CommentDO commentDO=new CommentDO();
-        Map<String,Object> map=new HashMap<>();
         commentDO.setArticleId(articleId);
-        List<CommentDO> commentDOS = commentService.list(query,commentDO);
+        List<CommentDO> commentDOS = commentService.list(commentDO);
         List<CommentDTO> commentDTOS = new ArrayList<>();
         for(CommentDO commentDOResponse:commentDOS){
             CommentDTO commentDTO = CommentDOConvert.commentDOToCommentDTO(commentDOResponse);
@@ -59,9 +56,7 @@ public class CommentController {
                 ResultCommentDTOS.add(commentDTO);
             }
         }
-        int total = commentService.count(map);
-        PageUtils pageUtil = new PageUtils(ResultCommentDTOS, total);
-        return ResultBean.ok().put("page",pageUtil);
+        return ResultBean.ok().put("data",ResultCommentDTOS);
     }
     /**
      * 增加评论

@@ -12,23 +12,12 @@
         <include refid="Base_Column_List"></include>
         from pap_comment
         <where>
-            <if test="comment.commentId != null and comment.commentId != ''"> and comment_id = #{comment.commentId} </if>
-            <if test="comment.parentId != null and comment.parentId != ''"> and parent_id = #{comment.parentId} </if>
-            <if test="comment.author != null and comment.author != ''"> and author = #{comment.author} </if>
-            <if test="comment.articleId != null and comment.articleId != ''"> and article_id = #{comment.articleId} </if>
-            <if test="query.name != null and query.name != ''"> and concat(author,tag) like '%${query.name}%' </if>
+            <if test="commentId != null and commentId != ''"> and comment_id = #{commentId} </if>
+            <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+            <if test="author != null and author != ''"> and author = #{author} </if>
+            <if test="articleId != null and articleId != ''"> and article_id = #{articleId} </if>
         </where>
-        <choose>
-            <when test="query.sort != null and query.sort.trim() != ''">
-                order by ${query.sort} ${query.order}
-            </when>
-            <otherwise>
-                order by like_num desc
-            </otherwise>
-        </choose>
-        <if test="query.offset != null and query.limit != null">
-            limit #{query.offset}, #{query.limit}
-        </if>
+        order by like_num desc
     </select>
 
     <select id="count" resultType="int">
