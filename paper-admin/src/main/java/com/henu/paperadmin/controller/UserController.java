@@ -17,6 +17,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -88,10 +91,28 @@ public class UserController extends BaseController {
 	@Log("增加用户")
 	@PostMapping()
     ResultBean save(@ApiParam(name="user",value = "用户相关信息") @RequestBody UserDTO user) {
-		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setCreateTime(new Date());
 		user.setStatus("1");
 		return ResultBean.operate(userService.save(user) > 0);
+	}
+
+	/**
+	 * 修改密码
+	 * @param newPwd
+	 * @return
+	 */
+	@ApiOperation("修改密码")
+	@Log("修改密码")
+	@PutMapping("changePwd")
+	public ResultBean changePwd(@ApiParam(name="newPwd",value = "新密码") @RequestBody String newPwd) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		UserDTO user=new UserDTO();
+		user.setId(SecuityUtils.getCurrentUser().getId());
+		user.setModifyTime(new Date());
+		user.setPassword(passwordEncoder.encode(newPwd));
+		return ResultBean.operate(userService.update(user) > 0);
 	}
 
 	/**
@@ -106,7 +127,6 @@ public class UserController extends BaseController {
 		user.setModifyTime(new Date());
 		return ResultBean.operate(userService.update(user) > 0);
 	}
-
 
 	/**
 	 * 删除用户

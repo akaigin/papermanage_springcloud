@@ -65,7 +65,7 @@ public final class HttpResponse {
         return simpleResponse(200,msg,data);
     }
 
-    /**--------------------------PageAndSortResponse-------------------------------------------------*/
+   /* *//**--------------------------PageAndSortResponse-------------------------------------------------*//*
     public  static PageAndSortResponse pageAndSortResponse(int status, PageQueryItems query) {
         return pageAndSortResponse(status, null, query);
     }
@@ -84,16 +84,16 @@ public final class HttpResponse {
         }
 
         return response;
-    }
-
+    }*/
+/*
     public static PageAndSortResponse successPageResponse(PageQueryItems items){
         return pageAndSortResponse(200,items);
     }
     public static PageAndSortResponse successPageResponse(String msg,PageQueryItems items){
         return pageAndSortResponse(200,msg,items);
-    }
+    }*/
 
-    /**--------------------------ListResponse-------------------------------------------------*/
+    /**--------------------------ListResponse-------------------------------------------------
     public  static ListResponse listResponse(int status, Items items) {
         return listResponse(status, null, items);
     }
@@ -111,7 +111,8 @@ public final class HttpResponse {
 
         return response;
 
-    }
+    }*/
+/*
 
     public static ListResponse successListResponse(Items items){
         return listResponse(200,items);
@@ -120,5 +121,6 @@ public final class HttpResponse {
     public static ListResponse successListResponse(String msg,Items items){
         return listResponse(200,msg,items);
     }
+*/
 
 }

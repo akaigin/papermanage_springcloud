@@ -43,5 +43,4 @@ public interface UserDao{
 	int batchRemove(Long[] userIds);
 	
 	Long[] listAllDept();
-
 }

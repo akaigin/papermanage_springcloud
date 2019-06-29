@@ -50,7 +50,6 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-
 	<select id="list" resultType="com.henu.paperadmin.domain.UserDO">
 		select
 		<include refid="Base_Column_List"></include>

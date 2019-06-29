@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		int r = userMapper.update(UserDOConvert.userDTOToUserDO(user));
 		Long userId = user.getId();
 		List<Long> roles = user.getRoleIds();
-		if(0!=roles.size()){
+		if(roles!=null&&0!=roles.size()){
 			userRoleMapper.removeByUserId(userId);
 			List<UserRoleDO> list = new ArrayList<>();
 			for (Long roleId : roles) {

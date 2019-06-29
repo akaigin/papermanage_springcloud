@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -167,7 +169,11 @@ public final class ExceptionAdviceHandler {
     public SimpleResponse authFieald(AuthFailureException ex) {
         return this.authErrorHandler(1, ex.getMessage());
     }
-
+    @ExceptionHandler(value = InvalidGrantException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public SimpleResponse authFailed(AuthFailureException ex) {
+        return this.authErrorHandler(1, "用户名或密码错误！");
+    }
 
     /**
      * 405错误
