@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.papermanage.common.system.dao.LoggingEventMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.henu.papermanage.common.system.model.LoggingEvent">
+		<id column="event_id" property="eventId" />
+		<result column="timestmp" property="timestmp" />
+		<result column="formatted_message" property="formattedMessage" />
+		<result column="logger_name" property="loggerName" />
+		<result column="level_string" property="levelString" />
+		<result column="thread_name" property="threadName" />
+		<result column="reference_flag" property="referenceFlag" />
+		<result column="arg0" property="arg0" />
+		<result column="arg1" property="arg1" />
+		<result column="arg2" property="arg2" />
+		<result column="arg3" property="arg3" />
+		<result column="caller_filename" property="callerFilename" />
+		<result column="caller_class" property="callerClass" />
+		<result column="caller_method" property="callerMethod" />
+		<result column="caller_line" property="callerLine" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        timestmp, formatted_message AS formattedMessage, logger_name AS loggerName, level_string AS levelString, thread_name AS threadName, reference_flag AS referenceFlag, arg0, arg1, arg2, arg3, caller_filename AS callerFilename, caller_class AS callerClass, caller_method AS callerMethod, caller_line AS callerLine, event_id AS eventId
+    </sql>
+
+</mapper>

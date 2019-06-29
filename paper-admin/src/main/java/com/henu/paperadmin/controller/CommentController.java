@@ -31,7 +31,7 @@ public class CommentController {
     UserCommentService userCommentService;
     //@PreAuthorize("hasAuthority('admin:comment:comment')")
     @ApiOperation("获取评论列表并分页")
-    @Log("获取评论列表")
+    @Log("获取评论列表并分页")
     @GetMapping("/list")
     ResultBean list(@ApiParam(name="articleId", value = "评论所处文章id") Long articleId) {
         CommentDO commentDO=new CommentDO();

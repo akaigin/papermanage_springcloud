@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.papermanage.common.system.dao.PapCommentMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.henu.papermanage.common.system.model.PapComment">
+		<id column="comment_id" property="commentId" />
+		<result column="parent_id" property="parentId" />
+		<result column="content" property="content" />
+		<result column="author" property="author" />
+		<result column="like_num" property="likeNum" />
+		<result column="create_time" property="createTime" />
+		<result column="article_id" property="articleId" />
+		<result column="to_who" property="toWho" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        comment_id AS commentId, parent_id AS parentId, content, author, like_num AS likeNum, create_time AS createTime, article_id AS articleId, to_who AS toWho
+    </sql>
+
+</mapper>
