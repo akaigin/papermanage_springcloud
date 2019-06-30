@@ -100,19 +100,23 @@ public class UserController extends BaseController {
 
 	/**
 	 * 修改密码
-	 * @param newPwd
+	 * @param user
 	 * @return
 	 */
 	@ApiOperation("修改密码")
 	@Log("修改密码")
 	@PutMapping("changePwd")
-	public ResultBean changePwd(@ApiParam(name="newPwd",value = "新密码") @RequestBody String newPwd) {
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		UserDTO user=new UserDTO();
-		user.setId(SecuityUtils.getCurrentUser().getId());
-		user.setModifyTime(new Date());
-		user.setPassword(passwordEncoder.encode(newPwd));
-		return ResultBean.operate(userService.update(user) > 0);
+	public ResultBean changePwd(@ApiParam(name="newPwd",value = "新密码") @RequestBody UserDTO user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String newPwd=user.getPassword();
+		UserDTO userDTO=new UserDTO();
+        userDTO.setId(SecuityUtils.getCurrentUser().getId());
+        userDTO.setModifyTime(new Date());
+		String code=passwordEncoder.encode(newPwd);
+        userDTO.setPassword(code);
+        System.out.println(newPwd);
+        System.out.println(code);
+		return ResultBean.operate(userService.update(userDTO) > 0);
 	}
 
 	/**

@@ -15,7 +15,8 @@ public class BCryptPasswordEncoderTest {
         String password="123456";
         BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
         String code=bCryptPasswordEncoder.encode(password);
-        if(bCryptPasswordEncoder.matches(password,"$2a$10$Okwlv56j1kPA/tHjnIxhY.VY4afOKSbu0oQsGWPVTTOxQGkDOCEyG")){
+        System.out.println(code);
+        if(bCryptPasswordEncoder.matches(password,"$2a$10$75G7jSvS/hFysFLJbzvNs.ohioHvsdItY12qNWvXuJZIPjw4quAKy")){
             System.out.println("匹配成功");
         }else{
             System.out.println("匹配失败");

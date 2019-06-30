@@ -107,8 +107,8 @@ public class CommentController {
      * @return
      */
     //@PreAuthorize("hasAuthority('admin:comment:delete')")
-    @ApiOperation("点击量+1")
-    @Log("点击量+1")
+    @ApiOperation("点赞数+1")
+    @Log("点赞数+1")
     @PutMapping("click")
     ResultBean clickPlus(@ApiParam(name="commentDTO", value = "评论相关信息") @RequestBody CommentDTO commentDTO) {
         return ResultBean.operate (commentService.updateLikeNumPlus(commentDTO.getCommentId()) > 0);
