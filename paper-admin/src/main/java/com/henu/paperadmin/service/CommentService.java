@@ -1,7 +1,9 @@
 package com.henu.paperadmin.service;
 
 import com.henu.paperadmin.domain.CommentDO;
+import com.henu.paperadmin.domain.UserCommentIslikeDO;
 import com.henu.paperadmin.dto.CommentDTO;
+import com.henu.paperadmin.dto.UserCommentDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -15,5 +17,5 @@ public interface CommentService {
 
     int remove(Long userId);
 
-    int updateLikeNumPlus(Long commentId);
+    int updateLikeNumPlus(List<UserCommentDTO> userCommentDTOS);
 }

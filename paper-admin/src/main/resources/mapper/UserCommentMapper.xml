@@ -11,4 +11,28 @@
 		user_id = #{userId} and
 		comment_id=#{commentId} limit 1
 	</select>
+
+	<select id="getLikeList" resultType="com.henu.paperadmin.domain.UserCommentIslikeDO">
+		select * from pap_user_comment_isLike where user_id=#{userId}
+	</select>
+
+	<insert id="addIsLike" parameterType="java.util.List">
+		insert into pap_user_comment_isLike
+		(
+		`user_id`,
+		`comment_id`
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.userId}, #{item.commentId})
+		</foreach>
+	</insert>
+
+	<delete id="deleteIsNotLike">
+		delete from pap_user_comment_isLike where id in
+		<foreach collection="list" item="item" index="no" open="("
+				 separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>

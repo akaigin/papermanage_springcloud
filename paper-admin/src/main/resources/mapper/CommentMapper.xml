@@ -61,7 +61,16 @@
 	</delete>
 
     <update id="updateLikeNumPlus">
-        update pap_comment set like_num=like_num+1
-        where comment_id=#{commentId}
+        update pap_comment set like_num=like_num+1 where comment_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.commentId}
+        </foreach>
+    </update>
+
+    <update id="updateLikeNumMinus">
+        update pap_comment set like_num=like_num-1 where comment_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.commentId}
+        </foreach>
     </update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.henu.paperadmin.dao;
 
 import com.henu.paperadmin.domain.CommentDO;
+import com.henu.paperadmin.domain.UserCommentIslikeDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,5 +18,7 @@ public interface CommentDao {
 
     int remove(Long commentId);
 
-    int updateLikeNumPlus(Long commentId);
+    int updateLikeNumPlus(List<CommentDO> commentDOs);
+
+    int updateLikeNumMinus(List<CommentDO> commentDOs);
 }

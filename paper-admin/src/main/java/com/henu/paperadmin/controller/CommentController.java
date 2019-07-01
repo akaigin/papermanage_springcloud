@@ -1,7 +1,9 @@
 package com.henu.paperadmin.controller;
 
 import com.henu.paperadmin.domain.CommentDO;
+import com.henu.paperadmin.domain.UserCommentIslikeDO;
 import com.henu.paperadmin.dto.CommentDTO;
+import com.henu.paperadmin.dto.UserCommentDTO;
 import com.henu.paperadmin.service.CommentService;
 import com.henu.paperadmin.service.UserCommentService;
 import com.henu.paperadmin.utils.CommentDOConvert;
@@ -109,9 +111,12 @@ public class CommentController {
     //@PreAuthorize("hasAuthority('admin:comment:delete')")
     @ApiOperation("点赞数+1")
     @Log("点赞数+1")
-    @PutMapping("click")
-    ResultBean clickPlus(@ApiParam(name="commentDTO", value = "评论相关信息") @RequestBody CommentDTO commentDTO) {
-        return ResultBean.operate (commentService.updateLikeNumPlus(commentDTO.getCommentId()) > 0);
+    @PutMapping("updateLikeNum")
+    ResultBean updateLikeNum(@ApiParam(name="commentDTO", value = "评论相关信息") @RequestBody List<UserCommentDTO> userCommentDTOS) {
+        for(UserCommentDTO userCommentDTO:userCommentDTOS){
+            userCommentDTO.setUserId(SecuityUtils.getCurrentUser().getId());
+        }
+        return ResultBean.operate (commentService.updateLikeNumPlus(userCommentDTOS) > 0);
     }
 
     String getToWho(Long parentId, List<CommentDO> commentDOS){
