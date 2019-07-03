@@ -12,11 +12,11 @@ public class BCryptPasswordEncoderTest {
 
     public static void main(String[] args) {
 
-        String password="123456";
+        String password="Zz123123";
         BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
         String code=bCryptPasswordEncoder.encode(password);
         System.out.println(code);
-        if(bCryptPasswordEncoder.matches(password,"$2a$10$75G7jSvS/hFysFLJbzvNs.ohioHvsdItY12qNWvXuJZIPjw4quAKy")){
+        if(bCryptPasswordEncoder.matches(password,"$2a$10$bljxjz5AdxlMLtAdg25CiOL3JuiBFfqpDDGB1dAYpLAHWencuYlMq")){
             System.out.println("匹配成功");
         }else{
             System.out.println("匹配失败");

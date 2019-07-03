@@ -30,13 +30,75 @@
         </if>
     </select>
 
-    <select id="count" resultType="int">
-        select count(*) from pap_report
+    <select id="listCheck" resultType="com.henu.paperadmin.domain.ReportDO">
+        select
+        pr.id, pr.description, pr.file_name, pr.file_path, pr.create_time, pr.modify_time, pr.status, pr.guidance, pr.create_user
+        from pap_report pr left join pap_user pu on pr.create_user=pu.name
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
-            <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
+            <if test="report.id != null and report.id != ''"> and id = #{report.id} </if>
+            <if test="report.description != null and report.description != ''"> and description = #{report.description} </if>
+            <if test="report.createUser != null and report.createUser != ''"> and create_user = #{report.createUser} </if>
+            <if test="report.tutorId != null and report.tutorId != ''"> and pu.tutor_id = #{report.tutorId} </if>
+            <if test="query.name != null and query.name != ''"> and concat(description,file_name,create_time,create_user) like '%${query.name}%' </if>
         </where>
+        <choose>
+            <when test="query.sort != null and query.sort.trim() != ''">
+                order by ${query.sort} ${query.order}
+            </when>
+            <otherwise>
+                order by pr.id asc
+            </otherwise>
+        </choose>
+        <if test="query.offset != null and query.limit != null">
+            limit #{query.offset}, #{query.limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select
+        count(1)
+        from pap_report
+        <where>
+            <if test="report.id != null and report.id != ''"> and id = #{report.id} </if>
+            <if test="report.description != null and report.description != ''"> and description = #{report.description} </if>
+            <if test="report.createUser != null and report.createUser != ''"> and create_user = #{report.createUser} </if>
+            <if test="query.name != null and query.name != ''"> and concat(description,file_name,create_time,create_user) like '%${query.name}%' </if>
+        </where>
+        <choose>
+            <when test="query.sort != null and query.sort.trim() != ''">
+                order by ${query.sort} ${query.order}
+            </when>
+            <otherwise>
+                order by id asc
+            </otherwise>
+        </choose>
+        <if test="query.offset != null and query.limit != null">
+            limit #{query.offset}, #{query.limit}
+        </if>
+    </select>
+
+    <select id="countCheck" resultType="int">
+        select
+        count(1)
+        from pap_report pr left join pap_user pu on pr.create_user=pu.name
+        <where>
+            <if test="report.id != null and report.id != ''"> and id = #{report.id} </if>
+            <if test="report.description != null and report.description != ''"> and description = #{report.description} </if>
+            <if test="report.createUser != null and report.createUser != ''"> and create_user = #{report.createUser} </if>
+            <if test="report.tutorId != null and report.tutorId != ''"> and pu.tutor_id = #{report.tutorId} </if>
+            <if test="query.name != null and query.name != ''"> and concat(description,file_name,create_time,create_user) like '%${query.name}%' </if>
+        </where>
+        <choose>
+            <when test="query.sort != null and query.sort.trim() != ''">
+                order by ${query.sort} ${query.order}
+            </when>
+            <otherwise>
+                order by pr.id asc
+            </otherwise>
+        </choose>
+        <if test="query.offset != null and query.limit != null">
+            limit #{query.offset}, #{query.limit}
+        </if>
     </select>
 
     <insert id="save" parameterType="com.henu.paperadmin.domain.ReportDO"

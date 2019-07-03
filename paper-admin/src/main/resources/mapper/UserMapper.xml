@@ -19,7 +19,14 @@
 		select
 		u.id, u.username,u.name,u.email,u.phone,u.sex
 		from pap_user u left join pap_user_role ur on ur.user_id=u.id
-		where ur.role_id=#{roleId} and concat(u.username,u.name) like '%${query.name}%'
+		<where>
+			ur.role_id in
+			<foreach item="roleId" collection="userDTO.roleIds" open="(" separator="," close=")">
+				#{roleId}
+			</foreach>
+			and concat(u.username,u.name) like '%${query.name}%'
+			<if test="userDTO.tutorId != null and userDTO.tutorId != ''"> and tutor_id = #{userDTO.tutorId} </if>
+		</where>
 	</select>
 
 	<select id="getUser" resultType="com.henu.paperadmin.domain.UserMO">
@@ -80,9 +87,17 @@
 	</select>
 
 	<select id="countByRoleId" resultType="int">
-		select count(*)
+		select
+		count(1)
 		from pap_user u left join pap_user_role ur on ur.user_id=u.id
-		where ur.role_id=#{roleId}
+		<where>
+			ur.role_id in
+			<foreach item="roleId" collection="userDTO.roleIds" open="(" separator="," close=")">
+				#{roleId}
+			</foreach>
+			and concat(u.username,u.name) like '%${query.name}%'
+			<if test="userDTO.tutorId != null and userDTO.tutorId != ''"> and tutor_id = #{userDTO.tutorId} </if>
+		</where>
 	</select>
 
 	<select id="getUserIdByUserName" resultType="long">

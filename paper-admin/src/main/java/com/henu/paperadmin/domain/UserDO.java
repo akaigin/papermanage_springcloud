@@ -33,6 +33,7 @@ public class UserDO extends Model<UserDO> {
      */
     @TableField("major_id")
     private Long majorId;
+    private Long tutorId;
     private String status;
     @TableField("create_time")
     private Date createTime;
@@ -40,6 +41,13 @@ public class UserDO extends Model<UserDO> {
     private Date modifyTime;
     private String sex;
 
+    public Long getTutorId() {
+        return tutorId;
+    }
+
+    public void setTutorId(Long tutorId) {
+        this.tutorId = tutorId;
+    }
 
     public Long getId() {
         return id;

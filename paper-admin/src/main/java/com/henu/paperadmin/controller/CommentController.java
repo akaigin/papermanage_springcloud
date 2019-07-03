@@ -17,6 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +32,10 @@ public class CommentController {
 
     @Autowired
     UserCommentService userCommentService;
-    //@PreAuthorize("hasAuthority('admin:comment:comment')")
-    @ApiOperation("获取评论列表并分页")
-    @Log("获取评论列表并分页")
+
+    @PreAuthorize("hasAuthority('admin:comment')")
+    @ApiOperation("根据文章ID获取评论列表")
+    @Log("根据文章ID获取评论列表")
     @GetMapping("/list")
     ResultBean list(@ApiParam(name="articleId", value = "评论所处文章id") Long articleId) {
         CommentDO commentDO=new CommentDO();
@@ -65,7 +67,7 @@ public class CommentController {
      * @param commentDTO
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:comment:add')")
+    //@PreAuthorize("hasAuthority('admin:comment')")
     @ApiOperation("增加评论")
     @Log("增加评论")
     @PostMapping()
@@ -83,7 +85,7 @@ public class CommentController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:comment:delete')")
+    //@PreAuthorize("hasAuthority('admin:comment')")
     @ApiOperation("删除评论")
     @Log("删除评论")
     @DeleteMapping()
@@ -108,9 +110,8 @@ public class CommentController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:comment:delete')")
-    @ApiOperation("点赞数+1")
-    @Log("点赞数+1")
+    @ApiOperation("根据页面关闭后评论点赞的变更情况更新数据库")
+    @Log("根据页面关闭后评论点赞的变更情况更新数据库")
     @PutMapping("updateLikeNum")
     ResultBean updateLikeNum(@ApiParam(name="commentDTO", value = "评论相关信息") @RequestBody List<UserCommentDTO> userCommentDTOS) {
         for(UserCommentDTO userCommentDTO:userCommentDTOS){
@@ -119,12 +120,4 @@ public class CommentController {
         return ResultBean.operate (commentService.updateLikeNumPlus(userCommentDTOS) > 0);
     }
 
-    String getToWho(Long parentId, List<CommentDO> commentDOS){
-        for(CommentDO commentDO:commentDOS){
-            if(commentDO.getArticleId()==parentId) {
-                return commentDO.getAuthor();
-            }
-        }
-        return "";
-    }
 }

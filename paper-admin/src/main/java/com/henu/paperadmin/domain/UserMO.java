@@ -17,6 +17,12 @@ public class UserMO extends Model<UserMO>{
     private String password;
     private String email;
     private String phone;
+    /**
+     * 专业id
+     */
+    @TableField("major_id")
+    private Long majorId;
+    private Long tutorId;
     private String status;
     @TableField("create_time")
     private Date createTime;
@@ -24,6 +30,21 @@ public class UserMO extends Model<UserMO>{
     private Date modifyTime;
     private String sex;
 
+    public Long getMajorId() {
+        return majorId;
+    }
+
+    public void setMajorId(Long majorId) {
+        this.majorId = majorId;
+    }
+
+    public Long getTutorId() {
+        return tutorId;
+    }
+
+    public void setTutorId(Long tutorId) {
+        this.tutorId = tutorId;
+    }
 
     public Long getId() {
         return id;

@@ -30,7 +30,7 @@ public class PlanController {
     @Autowired
     PlanService planService;
 
-    //@PreAuthorize("hasAuthority('admin:role:role')")
+    //@PreAuthorize("hasAuthority('admin:plan:list')")
     @ApiOperation("获取计划安排列表并分页")
     @Log("获取计划安排列表")
     @GetMapping("/list")
@@ -38,10 +38,8 @@ public class PlanController {
         Query query = new Query(params);
         String createUser= SecuityUtils.getCurrentUser().getName();
         PlanDO planDO=new PlanDO();
-        planDO.setCreateUser(createUser);
         List<PlanDTO> planDTOS = planService.list(query,planDO);
         Map<String,Object> map=new HashMap<>();
-        map.put("createUser",createUser);
         int total = planService.count(map);
         PageUtils pageUtil = new PageUtils(planDTOS, total);
         return ResultBean.ok().put("page",pageUtil);
@@ -51,7 +49,7 @@ public class PlanController {
      * @param planDTO
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:role:add')")
+    //@PreAuthorize("hasAuthority('admin:plan:add')")
     @ApiOperation("增加计划安排")
     @Log("增加计划安排")
     @PostMapping()
@@ -68,7 +66,7 @@ public class PlanController {
      * @param planDTO
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:role:update')")
+    //@PreAuthorize("hasAuthority('admin:plan:edit')")
     @ApiOperation("修改计划安排")
     @Log("修改计划安排")
     @PutMapping()
@@ -83,7 +81,7 @@ public class PlanController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:role:delete')")
+    //@PreAuthorize("hasAuthority('admin:plan:remove')")
     @ApiOperation("删除计划安排")
     @Log("删除计划安排")
     @DeleteMapping()

@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-	@Override
-    @Cacheable(key="'currentUser'")
+	@Override/*
+    @Cacheable(key="'currentUser'")*/
 	public LoginUserDTO getCurrentUser(Long id) {
 		LoginUserDTO user = userMapper.getCurrentUser(id);
 		return user;
@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserMO> getUserList(Map<String,Object> map, Long roleId){
-		return userMapper.getUserList(map,roleId);
+	public List<UserMO> getUserList(Map<String,Object> map, UserDTO userDTO){
+		return userMapper.getUserList(map,userDTO);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int countByRoleId(Map<String, Object> map,Long roleId) {
-		return userMapper.countByRoleId(map,roleId);
+	public int countByRoleId(Map<String, Object> map, UserDTO userDTO) {
+		return userMapper.countByRoleId(map,userDTO);
 	}
 
 	@Override

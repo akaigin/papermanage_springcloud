@@ -55,9 +55,42 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public int count(Map<String,Object> map){
-        return reportMapper.count(map);
+    public List<ReportDTO> listCheck(Map<String,Object> query, ReportDTO report){
+        List<ReportDO> reportDOS=reportMapper.listCheck(query,report);
+        List<ReportDTO> reportDTOS= new ArrayList<>();
+        for(ReportDO reportDOResponse:reportDOS){
+            ReportDTO reportDTO = new ReportDTO();
+            reportDTO.setId(reportDOResponse.getId());
+            reportDTO.setDescription(reportDOResponse.getDescription());
+            reportDTO.setFileName(reportDOResponse.getFileName());
+            reportDTO.setFilePath(reportDOResponse.getFilePath());
+            reportDTO.setCreateTime(reportDOResponse.getCreateTime());
+            reportDTO.setModifyTime(reportDOResponse.getModifyTime());
+            reportDTO.setCreateUser(reportDOResponse.getCreateUser());
+            reportDTO.setGuidance(reportDOResponse.getGuidance());
+            reportDTO.setStatus(reportDOResponse.getStatus());
+            List<Long> roleIds=reportRoleMapper.getRoleIdsByReportId(reportDOResponse.getId());
+            String roleNames="";
+            List<String> roleNamesResponse=roleMapper.getRoleNamesByRoleIds(roleIds);
+            for(String roleNameResponse:roleNamesResponse){
+                roleNames+=roleNameResponse+" ";
+            }
+            reportDTO.setRoleNames(roleNames);
+            reportDTOS.add(reportDTO);
+        }
+        return reportDTOS;
     }
+
+    @Override
+    public int count(Map<String,Object> query, ReportDO reportDO){
+        return reportMapper.count(query, reportDO);
+    }
+
+    @Override
+    public int countCheck(Map<String,Object> query, ReportDTO report){
+        return reportMapper.countCheck(query, report);
+    }
+
     @Override
     public int save(ReportDTO report) {
         ReportDO reportDO= ReportDOConvert.reportDTOToReportDO(report);

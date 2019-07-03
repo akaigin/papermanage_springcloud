@@ -19,11 +19,11 @@ public interface UserService {
 
 	UserDO get(Long id);
 
-	List<UserMO> getUserList(Map<String,Object> map,Long roleId);
+	List<UserMO> getUserList(Map<String,Object> map,UserDTO userDTO);
 
 	List<UserDO> list(Map<String, Object> map);
 
-	int countByRoleId(Map<String, Object> map,Long roleId);
+	int countByRoleId(Map<String, Object> map, UserDTO userDTO);
 
 	int count(Map<String, Object> map);
 

@@ -3,6 +3,7 @@ package com.henu.paperadmin.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.henu.paperadmin.domain.PlanDO;
 import com.henu.paperadmin.domain.ReportDO;
+import com.henu.paperadmin.dto.ReportDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,7 +14,11 @@ import java.util.Map;
 public interface ReportDao extends BaseMapper<ReportDO> {
     List<ReportDO> list(@Param("query") Map<String, Object> map, @Param("report") ReportDO reportDO);
 
-    int count(Map<String,Object> map);
+    List<ReportDO> listCheck(@Param("query") Map<String, Object> map, @Param("report") ReportDTO reportDTO);
+
+    int count(@Param("query") Map<String, Object> map, @Param("report") ReportDO reportDO);
+
+    int countCheck(@Param("query") Map<String, Object> map, @Param("report") ReportDTO reportDTO);
 
     int save(ReportDO reportDO);
 

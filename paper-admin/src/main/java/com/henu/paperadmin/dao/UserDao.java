@@ -2,6 +2,7 @@ package com.henu.paperadmin.dao;
 
 import com.henu.paperadmin.domain.UserDO;
 import com.henu.paperadmin.domain.UserMO;
+import com.henu.paperadmin.dto.UserDTO;
 import com.henu.papercommon.dto.LoginUserDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,13 +23,13 @@ public interface UserDao{
 
 	UserDO get(Long userId);
 
-	List<UserMO> getUserList(@Param("query") Map<String,Object> map, @Param("roleId") Long roleId);
+	List<UserMO> getUserList(@Param("query") Map<String,Object> map, @Param("userDTO") UserDTO userDTO);
 
 	List<UserMO> getUser(Map<String, Object> map);
 
 	List<UserDO> list(Map<String, Object> map);
 
-	int countByRoleId(Map<String,Object> map,Long roleId);
+	int countByRoleId(@Param("query") Map<String,Object> map, @Param("userDTO") UserDTO userDTO);
 
 	Long getUserIdByUserName(String userName);
 

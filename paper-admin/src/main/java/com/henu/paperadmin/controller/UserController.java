@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.common.exceptions.InvalidGrantExcepti
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,7 @@ public class UserController extends BaseController {
 	 * @param id
 	 * @return
 	 */
+	//@PreAuthorize("hasAuthority('admin:user:get')")
 	@ApiOperation("根据id获取用户信息")
 	@Log("根据id获取用户信息")
     @GetMapping("{id}")
@@ -64,10 +66,11 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 分页查询教师
+	 * 根据role_id分页查询用户列表
 	 * @param params
 	 * @return
 	 */
+	//@PreAuthorize("hasAuthority('admin:user:list')")
 	@ApiOperation("根据角色id获取用户列表")
 	@Log("根据角色id获取用户列表")
 	@GetMapping("/roleId/{roleId}")
@@ -75,9 +78,15 @@ public class UserController extends BaseController {
 									 @ApiParam(name="params",value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
 
 		Query query = new Query(params);
-		List<UserDTO> userDTOS = UserMOConvert.userMOListToUserDTOList((userService.getUserList(query,roleId)));
+		UserDTO userDTO=new UserDTO();
+		List<Long> roleIds=new ArrayList<>();
+		roleIds.add(roleId);
+		userDTO.setRoleIds(roleIds);
+		if(roleId.equals(3))
+			userDTO.setTutorId(SecuityUtils.getCurrentUser().getId());
+		List<UserDTO> userDTOS = UserMOConvert.userMOListToUserDTOList((userService.getUserList(query,userDTO)));
 		//进行分页
-		int total = userService.countByRoleId(query,roleId);
+		int total = userService.countByRoleId(query,userDTO);
 		PageUtils pageUtil = new PageUtils(userDTOS, total);
 		return ResultBean.ok().put("page",pageUtil);
 	}
@@ -87,6 +96,7 @@ public class UserController extends BaseController {
 	 * @param user
 	 * @return
 	 */
+	//@PreAuthorize("hasAuthority('admin:user:add')")
 	@ApiOperation("增加用户")
 	@Log("增加用户")
 	@PostMapping()
@@ -103,6 +113,7 @@ public class UserController extends BaseController {
 	 * @param user
 	 * @return
 	 */
+	//@PreAuthorize("hasAuthority('admin:user:resetPwd')")
 	@ApiOperation("修改密码")
 	@Log("修改密码")
 	@PutMapping("changePwd")
@@ -124,6 +135,7 @@ public class UserController extends BaseController {
 	 * @param user
 	 * @return
 	 */
+	//@PreAuthorize("hasAuthority('admin:user:edit')")
 	@ApiOperation("修改用户")
 	@Log("修改用户")
 	@PutMapping()
@@ -137,6 +149,7 @@ public class UserController extends BaseController {
 	 * @param id
 	 * @return
 	 */
+	//@PreAuthorize("hasAuthority('admin:user:remove')")
 	@ApiOperation("删除用户")
 	@Log("删除用户")
 	@DeleteMapping()
@@ -144,6 +157,7 @@ public class UserController extends BaseController {
 		return ResultBean.operate (userService.remove(id) > 0);
 	}
 
+	//@PreAuthorize("hasAuthority('admin:user:batchRemove')")
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	ResultBean batchRemove(@RequestParam("ids[]") Long[] userIds) {

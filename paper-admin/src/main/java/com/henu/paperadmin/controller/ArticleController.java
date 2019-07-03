@@ -29,7 +29,7 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
-    //@PreAuthorize("hasAuthority('admin:article:article')")
+    //@PreAuthorize("hasAuthority('admin:article:list')")
     @ApiOperation("获取文章列表并分页")
     @Log("获取文章列表")
     @GetMapping("/list")
@@ -75,7 +75,7 @@ public class ArticleController {
      * @param articleDTO
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:article:update')")
+    //@PreAuthorize("hasAuthority('admin:article:edit')")
     @ApiOperation("修改文章")
     @Log("修改文章")
     @PutMapping()
@@ -90,7 +90,7 @@ public class ArticleController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:article:delete')")
+    //@PreAuthorize("hasAuthority('admin:article:remove')")
     @ApiOperation("删除文章")
     @Log("删除文章")
     @DeleteMapping()
@@ -115,7 +115,6 @@ public class ArticleController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:article:delete')")
     @ApiOperation("点击量+1")
     @Log("点击量+1")
     @PutMapping("click")

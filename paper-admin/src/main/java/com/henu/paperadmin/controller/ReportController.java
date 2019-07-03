@@ -28,7 +28,7 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
-    //@PreAuthorize("hasAuthority('admin:report:report')")
+    //@PreAuthorize("hasAuthority('admin:report:list')")
     @ApiOperation("获取报告列表并分页")
     @Log("获取报告列表")
     @GetMapping("/list")
@@ -40,7 +40,22 @@ public class ReportController {
         List<ReportDTO> reportDTOS = reportService.list(query,reportDO);
         Map<String,Object> map=new HashMap<>();
         map.put("createUser",createUser);
-        int total = reportService.count(map);
+        int total = reportService.count(query,reportDO);
+        PageUtils pageUtil = new PageUtils(reportDTOS, total);
+        return ResultBean.ok().put("page",pageUtil);
+    }
+
+    //@PreAuthorize("hasAuthority('admin:report:list')")
+    @ApiOperation("获取报告列表并分页")
+    @Log("获取报告列表")
+    @GetMapping("/listCheck")
+    ResultBean listCheck(@ApiParam(name="params", value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
+        Query query = new Query(params);
+        Long tutorId= SecuityUtils.getCurrentUser().getId();
+        ReportDTO reportDTO=new ReportDTO();
+        reportDTO.setTutorId(tutorId);
+        List<ReportDTO> reportDTOS = reportService.listCheck(query,reportDTO);
+        int total = reportService.countCheck(query, reportDTO);
         PageUtils pageUtil = new PageUtils(reportDTOS, total);
         return ResultBean.ok().put("page",pageUtil);
     }
@@ -67,7 +82,7 @@ public class ReportController {
      * @param reportDTO
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:report:update')")
+    //@PreAuthorize("hasAuthority('admin:report:edit')")
     @ApiOperation("修改报告")
     @Log("修改报告")
     @PutMapping()
@@ -82,7 +97,7 @@ public class ReportController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:report:delete')")
+    //@PreAuthorize("hasAuthority('admin:report:remove')")
     @ApiOperation("删除报告")
     @Log("删除报告")
     @DeleteMapping()
@@ -95,7 +110,7 @@ public class ReportController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:report:delete')")
+    //@PreAuthorize("hasAuthority('admin:report:check')")
     @ApiOperation("发表指导意见")
     @Log("发表指导意见")
     @PostMapping("guidance")
@@ -108,7 +123,6 @@ public class ReportController {
      * @param
      * @return
      */
-    //@PreAuthorize("hasAuthority('admin:report:delete')")
     @ApiOperation("查看指导意见")
     @Log("查看指导意见")
     @GetMapping("guidance")

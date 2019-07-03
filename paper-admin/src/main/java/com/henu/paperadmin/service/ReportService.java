@@ -9,7 +9,11 @@ import java.util.Map;
 public interface ReportService {
     List<ReportDTO> list(Map<String,Object> query, ReportDO reportDO);
 
-    int count(Map<String,Object> map);
+    List<ReportDTO> listCheck(Map<String,Object> query, ReportDTO report);
+
+    int count(Map<String,Object> query, ReportDO reportDO);
+
+    int countCheck(Map<String,Object> query, ReportDTO report);
 
     int save(ReportDTO user);
 
