@@ -2,7 +2,7 @@ package com.henu.paperadmin.dto;
 
 /**
  * 用户角色
- * @author tiger 1992lcg@163.com
+ * @author tiger
  */
 public class UserRoleDTO {
     public Long getId() {

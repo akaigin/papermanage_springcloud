@@ -19,4 +19,6 @@ public class Constants {
     public static final String	MODULE_INFO		= "module_info_";
 
     public static final String	MAJOR_INFO	    = "major_info_";
+
+    public static final String	ARTICLE_INFO	    = "article_info_";
 }

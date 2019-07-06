@@ -32,8 +32,8 @@ public class AuthorityServiceImpl implements AuthorityService {
         return authorityDao.getMenuListByUserId(userId);
     }
 
-    @Override
-    @Cacheable(key="'authorities_byUserId_'+#userId")
+    @Override/*
+    @Cacheable(key="'authorities_byUserId_'+#userId")*/
     public List<RouterDTO> RouterDTOsByUserId(Long userId) {
         List<AuthorityMO> authorityMOS = userMenus(userId);
         List<RouterDTO> routerDTOs = new ArrayList<>();

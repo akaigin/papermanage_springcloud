@@ -1,11 +1,13 @@
 package com.henu.paperadmin.controller;
 
+import com.henu.paperadmin.config.ThreadConfig;
 import com.henu.paperadmin.domain.CommentDO;
 import com.henu.paperadmin.domain.UserCommentIslikeDO;
 import com.henu.paperadmin.dto.CommentDTO;
 import com.henu.paperadmin.dto.UserCommentDTO;
 import com.henu.paperadmin.service.CommentService;
 import com.henu.paperadmin.service.UserCommentService;
+import com.henu.paperadmin.service.impl.UserCommentServiceImpl;
 import com.henu.paperadmin.utils.CommentDOConvert;
 import com.henu.paperadmin.utils.SecuityUtils;
 import com.henu.paperadmin.utils.ToolUtils;
@@ -17,11 +19,16 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 @RequestMapping("/comment")
 @RestController
@@ -30,8 +37,11 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @Autowired
+    @Resource
     UserCommentService userCommentService;
+
+    @Resource
+    private ExecutorService executorService;
 
     @PreAuthorize("hasAuthority('admin:comment')")
     @ApiOperation("根据文章ID获取评论列表")
@@ -43,8 +53,15 @@ public class CommentController {
         List<CommentDO> commentDOS = commentService.list(commentDO);
         List<CommentDTO> commentDTOS = new ArrayList<>();
         for(CommentDO commentDOResponse:commentDOS){
+            System.out.println(Thread.currentThread().getName()+":");
             CommentDTO commentDTO = CommentDOConvert.commentDOToCommentDTO(commentDOResponse);
-            commentDTO.setIsLike(userCommentService.isLikeComment(SecuityUtils.getCurrentUser().getId(),commentDOResponse.getCommentId())>0);
+            Future fal  = executorService.submit(new Callable<String>() {
+                @Override
+                public String call() {
+                    commentDTO.setIsLike(userCommentService.isLikeComment(SecuityUtils.getCurrentUser().getId(),commentDOResponse.getCommentId())>0);
+                    return "处理成功！";
+                }
+            });
             commentDTOS.add(commentDTO);
         }
         List<CommentDTO> ResultCommentDTOS=new ArrayList<>();
