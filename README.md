@@ -54,15 +54,15 @@
 
 9.启动前端项目 https://github.com/akaigin/paper_springcloud_vuefont
 ### 系统截图
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/login.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/login.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/dashboard.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/dashboard.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/info.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/info.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/studentList.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/studentList.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/role.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/role.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/plan.png "屏幕截图.png")
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/plan.png)
 
