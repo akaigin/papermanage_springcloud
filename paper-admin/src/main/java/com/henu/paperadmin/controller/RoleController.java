@@ -29,7 +29,7 @@ public class RoleController {
 
     @PreAuthorize("hasAuthority('admin:role:role')")
     @ApiOperation("获取角色列表并分页")
-    @Log("获取角色列表")
+    //@Log("获取角色列表")
     @GetMapping()
     PageUtils list(@ApiParam(name="params", value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
         Query query = new Query(params);
@@ -40,7 +40,7 @@ public class RoleController {
     }
 
     @ApiOperation("根据用户id获取其角色列表")
-    @Log("根据用户id获取其角色列表")
+    //@Log("根据用户id获取其角色列表")
     @GetMapping("/userId/{userId}")
     List<Long> roleIdByUserId(@ApiParam(name="userId", value = "所要搜索的用户id") @PathVariable Long userId){
         return roleService.RoleIdsByUserId(userId);

@@ -15,11 +15,12 @@
 		<result column="create_time" property="createTime" />
 		<result column="modify_time" property="modifyTime" />
 		<result column="sex" property="sex" />
+		<result column="tutor_id" property="tutorId" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, username, name, password, email, phone, major_id AS majorId, status, create_time AS createTime, modify_time AS modifyTime, sex
+        id, username, name, password, email, phone, major_id AS majorId, status, create_time AS createTime, modify_time AS modifyTime, sex, tutor_id AS tutorId
     </sql>
 
 </mapper>

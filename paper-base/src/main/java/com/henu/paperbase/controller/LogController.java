@@ -1,6 +1,7 @@
 package com.henu.paperbase.controller;
 
 
+import com.henu.paperbase.service.UserInfoRpcService;
 import com.henu.papercommon.dto.LogDO;
 import com.henu.papercommon.utils.PageUtils;
 import com.henu.papercommon.utils.Query;
@@ -9,6 +10,7 @@ import com.henu.paperbase.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Map;
 
 @RequestMapping("/log")
@@ -17,6 +19,8 @@ public class LogController {
     @Autowired
     LogService logService;
 
+    @Autowired
+    UserInfoRpcService userInfoRpcService;
     @GetMapping()
     ResultBean list(@RequestParam Map<String, Object> params) {
         Query query = new Query(params);
@@ -25,6 +29,11 @@ public class LogController {
 
     @PostMapping("/save")
     ResultBean save(@RequestBody LogDO logDO) {
+        String name=userInfoRpcService.getName();
+        logDO.setUsername(name);
+        // 系统当前时间
+        Date date =new Date();
+        logDO.setCreateTime(date);
         if (logService.save(logDO) > 0) {
             return ResultBean.ok();
         }

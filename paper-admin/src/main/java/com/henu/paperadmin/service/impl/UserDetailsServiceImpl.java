@@ -4,6 +4,8 @@ import com.henu.paperadmin.dao.UserDao;
 import com.henu.paperadmin.domain.UserMO;
 import com.henu.paperadmin.secuity.CurrentUser;
 import com.henu.paperadmin.service.AuthorityService;
+import com.henu.paperadmin.utils.SecuityUtils;
+import com.henu.papercommon.context.FilterContextHandler;
 import com.henu.papercommon.exception.CDException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +34,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new CDException("用户名或密码错误！");
         }
         UserMO userMO = userList.get(0);
+        FilterContextHandler.setUsername(userMO.getUsername());
+        FilterContextHandler.setName(userMO.getName());
+        FilterContextHandler.setUserID(userMO.getId().toString());
         Set<String> perms = authorityService.getPermissionList(userMO.getId());
         Set<GrantedAuthority> authorities = perms.stream().filter(Objects::nonNull).map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
         return new CurrentUser(username, userMO.getPassword(), userMO.getId(), userMO.getName(),authorities);

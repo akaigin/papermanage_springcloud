@@ -2,13 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.henu.paperbase.dao.LogDao">
-
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+        id, user_id AS userId, username, operation, time, method, params, ip, create_time AS createTime
+    </sql>
+	
 	<select id="get" resultType="com.henu.papercommon.dto.LogDO">
-		select `id`,`user_id`,`username`,`operation`,`time`,`method`,`params`,`ip`,`gmt_create` from sys_log where id = #{value}
+		select 
+		<include refid="Base_Column_List"></include>
+		from pap_log where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.henu.papercommon.dto.LogDO">
-		select `id`,`user_id`,`username`,`operation`,`time`,`method`,`params`,`ip`,`gmt_create` from sys_log
+		select
+		<include refid="Base_Column_List"></include>
+		from pap_log
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
@@ -18,7 +26,7 @@
 		  		  <if test="method != null and method != ''"> and method = #{method} </if>
 		  		  <if test="params != null and params != ''"> and params = #{params} </if>
 		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
-		  		  <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -34,7 +42,7 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sys_log
+		select count(*) from pap_log
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
@@ -44,12 +52,12 @@
 		  		  <if test="method != null and method != ''"> and method = #{method} </if>
 		  		  <if test="params != null and params != ''"> and params = #{params} </if>
 		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
-		  		  <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.henu.papercommon.dto.LogDO" useGeneratedKeys="true" keyProperty="id">
-		insert into sys_log
+		insert into pap_log
 		(
 			`user_id`, 
 			`username`, 
@@ -58,7 +66,7 @@
 			`method`, 
 			`params`, 
 			`ip`, 
-			`gmt_create`
+			`create_time`
 		)
 		values
 		(
@@ -69,12 +77,12 @@
 			#{method}, 
 			#{params}, 
 			#{ip}, 
-			#{gmtCreate}
+			#{createTime}
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.henu.papercommon.dto.LogDO">
-		update sys_log 
+		update pap_log 
 		<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>
 			<if test="username != null">`username` = #{username}, </if>
@@ -83,17 +91,17 @@
 			<if test="method != null">`method` = #{method}, </if>
 			<if test="params != null">`params` = #{params}, </if>
 			<if test="ip != null">`ip` = #{ip}, </if>
-			<if test="gmtCreate != null">`gmt_create` = #{gmtCreate}</if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
 		</set>
 		where id = #{id}
 	</update>
 	
 	<delete id="remove">
-		delete from sys_log where id = #{value}
+		delete from pap_log where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from sys_log where id in 
+		delete from pap_log where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

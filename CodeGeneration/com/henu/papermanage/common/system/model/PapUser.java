@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-27
+ * @since 2019-07-07
  */
 @TableName("pap_user")
 public class PapUser extends Model<PapUser> {
@@ -39,6 +39,11 @@ public class PapUser extends Model<PapUser> {
 	@TableField("modify_time")
 	private Date modifyTime;
 	private String sex;
+    /**
+     * 导师id，若角色为老师或管理员则为0或null
+     */
+	@TableField("tutor_id")
+	private Long tutorId;
 
 
 	public Long getId() {
@@ -129,6 +134,14 @@ public class PapUser extends Model<PapUser> {
 		this.sex = sex;
 	}
 
+	public Long getTutorId() {
+		return tutorId;
+	}
+
+	public void setTutorId(Long tutorId) {
+		this.tutorId = tutorId;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -148,6 +161,7 @@ public class PapUser extends Model<PapUser> {
 			", createTime=" + createTime +
 			", modifyTime=" + modifyTime +
 			", sex=" + sex +
+			", tutorId=" + tutorId +
 			"}";
 	}
 }

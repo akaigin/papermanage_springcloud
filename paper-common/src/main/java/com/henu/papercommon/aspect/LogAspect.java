@@ -72,13 +72,11 @@ public class LogAspect {
         // 设置IP地址
         sysLog.setIp(IPUtils.getIpAddr(request));
         // 用户名
-
         sysLog.setUserId(Long.parseLong(FilterContextHandler.getUserID() == null ? "000000" : FilterContextHandler.getUserID()));
         sysLog.setUsername(FilterContextHandler.getUsername() == null ? "" : FilterContextHandler.getUsername());
+        /*sysLog.setUserId(SecuityUtils.getCurrentUser().getId());
+        sysLog.setUsername(FilterContextHandler.getUsername() == null ? "" : FilterContextHandler.getUsername());*/
         sysLog.setTime((int) time);
-        // 系统当前时间
-        Date date = new Date();
-        sysLog.setGmtCreate(date);
         // 保存系统日志
         logService.save(sysLog);
     }

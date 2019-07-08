@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-27
+ * @since 2019-07-07
  */
 @TableName("logging_event_property")
 public class LoggingEventProperty extends Model<LoggingEventProperty> {

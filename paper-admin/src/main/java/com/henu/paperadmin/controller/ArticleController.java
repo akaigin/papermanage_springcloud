@@ -31,7 +31,7 @@ public class ArticleController {
 
     //@PreAuthorize("hasAuthority('admin:article:list')")
     @ApiOperation("获取文章列表并分页")
-    @Log("获取文章列表")
+    //@Log("获取文章列表")
     @GetMapping("/list")
     ResultBean list(@ApiParam(name="params", value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
         Query query = new Query(params);
@@ -116,7 +116,7 @@ public class ArticleController {
      * @return
      */
     @ApiOperation("点击量+1")
-    @Log("点击量+1")
+    //@Log("点击量+1")
     @PutMapping("click")
     ResultBean clickPlus(@ApiParam(name="articleDTO", value = "文章相关信息") @RequestBody ArticleDTO articleDTO) {
         return ResultBean.operate (articleService.updateClickPlus(articleDTO.getArticleId()) > 0);

@@ -5,6 +5,7 @@ import com.henu.paperadmin.service.TokenService;
 import com.henu.paperadmin.service.UserService;
 import com.henu.paperadmin.utils.SecuityUtils;
 import com.henu.papercommon.annotation.Log;
+import com.henu.papercommon.context.FilterContextHandler;
 import com.henu.papercommon.utils.RedisUtil;
 import com.henu.papercommon.utils.ResultBean;
 import io.swagger.annotations.Api;
@@ -15,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author tiger 1992lcg@163.com
+ * @author tiger
  * @version V1.0
  */
 @RequestMapping()
@@ -38,7 +39,7 @@ public class LoginController {
 
     @GetMapping("/router")
     @ApiOperation(value = "获取菜单信息")
-    @Log("获取菜单信息")
+    @Log("用户登录")
     public ResultBean router() {
         return ResultBean.ok().put("router", authorityService.RouterDTOsByUserId(SecuityUtils.getCurrentUser().getId()));
     }
@@ -49,6 +50,7 @@ public class LoginController {
     public ResultBean logout(@ApiParam("token") String token) {
         consumerTokenServices.revokeToken(token);
         userService.cacheRemove();
+        FilterContextHandler.remove();
         return ResultBean.ok();
     }
 

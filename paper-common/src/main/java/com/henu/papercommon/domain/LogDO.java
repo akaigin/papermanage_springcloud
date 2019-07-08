@@ -1,4 +1,4 @@
-package com.henu.papercommon.dto;
+package com.henu.papercommon.domain;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
@@ -19,42 +19,42 @@ import java.io.Serializable;
 @TableName("pap_log")
 public class LogDO extends Model<LogDO> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Long id;
-	/**
-	 * 用户id
-	 */
+    /**
+     * 用户id
+     */
 	@TableField("user_id")
 	private Long userId;
-	/**
-	 * 用户名
-	 */
+    /**
+     * 用户名
+     */
 	private String username;
-	/**
-	 * 用户操作
-	 */
+    /**
+     * 用户操作
+     */
 	private String operation;
-	/**
-	 * 响应时间
-	 */
+    /**
+     * 响应时间
+     */
 	private Integer time;
-	/**
-	 * 请求方法
-	 */
+    /**
+     * 请求方法
+     */
 	private String method;
-	/**
-	 * 请求参数
-	 */
+    /**
+     * 请求参数
+     */
 	private String params;
-	/**
-	 * IP地址
-	 */
+    /**
+     * IP地址
+     */
 	private String ip;
-	/**
-	 * 创建时间
-	 */
+    /**
+     * 创建时间
+     */
 	@TableField("create_time")
 	private Date createTime;
 
@@ -139,15 +139,15 @@ public class LogDO extends Model<LogDO> {
 	@Override
 	public String toString() {
 		return "PapLog{" +
-				", id=" + id +
-				", userId=" + userId +
-				", username=" + username +
-				", operation=" + operation +
-				", time=" + time +
-				", method=" + method +
-				", params=" + params +
-				", ip=" + ip +
-				", createTime=" + createTime +
-				"}";
+			", id=" + id +
+			", userId=" + userId +
+			", username=" + username +
+			", operation=" + operation +
+			", time=" + time +
+			", method=" + method +
+			", params=" + params +
+			", ip=" + ip +
+			", createTime=" + createTime +
+			"}";
 	}
 }

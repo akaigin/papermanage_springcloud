@@ -32,7 +32,7 @@ public class PlanController {
 
     //@PreAuthorize("hasAuthority('admin:plan:list')")
     @ApiOperation("获取计划安排列表并分页")
-    @Log("获取计划安排列表")
+    //@Log("获取计划安排列表")
     @GetMapping("/list")
     ResultBean list(@ApiParam(name="params", value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
         Query query = new Query(params);

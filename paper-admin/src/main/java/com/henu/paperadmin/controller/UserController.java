@@ -7,6 +7,7 @@ import com.henu.paperadmin.service.RoleService;
 import com.henu.paperadmin.service.UserService;
 import com.henu.paperadmin.utils.MD5Utils;
 import com.henu.paperadmin.utils.SecuityUtils;
+import com.henu.paperadmin.utils.ToolUtils;
 import com.henu.paperadmin.utils.UserMOConvert;
 import com.henu.papercommon.annotation.Log;
 import com.henu.papercommon.dto.LoginUserDTO;
@@ -23,6 +24,7 @@ import org.springframework.security.oauth2.common.exceptions.InvalidGrantExcepti
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +47,7 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@ApiOperation("获取当前登录用户的相关信息")
-	@Log("获取当前登录用户的相关信息")
+	//@Log("用户登录")
     @GetMapping("/currentUser")
 	public LoginUserDTO currentUser(){
 		return userService.getCurrentUser(SecuityUtils.getCurrentUser().getId());
@@ -58,7 +60,7 @@ public class UserController extends BaseController {
 	 */
 	//@PreAuthorize("hasAuthority('admin:user:get')")
 	@ApiOperation("根据id获取用户信息")
-	@Log("根据id获取用户信息")
+	//@Log("根据id获取用户信息")
     @GetMapping("{id}")
 	ResultBean get(@ApiParam(name="id",value = "所要搜索的用户id",required = true) @PathVariable("id") Long id ){
 		UserDTO userDTO = UserConvert.MAPPER.do2dto(userService.get(id));
@@ -72,7 +74,7 @@ public class UserController extends BaseController {
 	 */
 	//@PreAuthorize("hasAuthority('admin:user:list')")
 	@ApiOperation("根据角色id获取用户列表")
-	@Log("根据角色id获取用户列表")
+	//@Log("根据角色id获取用户列表")
 	@GetMapping("/roleId/{roleId}")
 	public ResultBean getTeacherList(@ApiParam(name="roleId",value = "所要搜索的角色id",required = true) @PathVariable Long roleId,
 									 @ApiParam(name="params",value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
@@ -82,7 +84,7 @@ public class UserController extends BaseController {
 		List<Long> roleIds=new ArrayList<>();
 		roleIds.add(roleId);
 		userDTO.setRoleIds(roleIds);
-		if(roleId.equals(3))
+		if(roleId.equals(ToolUtils.intToLong(3)))
 			userDTO.setTutorId(SecuityUtils.getCurrentUser().getId());
 		List<UserDTO> userDTOS = UserMOConvert.userMOListToUserDTOList((userService.getUserList(query,userDTO)));
 		//进行分页
@@ -178,5 +180,10 @@ public class UserController extends BaseController {
 	@GetMapping("/tokenUser")
 	public Principal user(Principal user){
 		return user;
+	}
+
+	@GetMapping("/getName")
+	public String getName(){
+		return SecuityUtils.getCurrentUser().getName();
 	}
 }

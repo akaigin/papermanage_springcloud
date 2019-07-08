@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author zhangjinhu
- * @since 2019-06-27
+ * @since 2019-07-07
  */
 @Service
 public class PapAuthorityServiceImpl extends ServiceImpl<PapAuthorityMapper, PapAuthority> implements PapAuthorityService {

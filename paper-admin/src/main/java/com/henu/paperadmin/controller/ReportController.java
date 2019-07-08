@@ -30,7 +30,7 @@ public class ReportController {
 
     //@PreAuthorize("hasAuthority('admin:report:list')")
     @ApiOperation("获取报告列表并分页")
-    @Log("获取报告列表")
+    //@Log("获取报告列表")
     @GetMapping("/list")
     ResultBean list(@ApiParam(name="params", value = "分页配置相关信息") @RequestParam Map<String, Object> params) {
         Query query = new Query(params);

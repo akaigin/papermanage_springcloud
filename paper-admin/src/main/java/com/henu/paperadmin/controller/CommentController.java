@@ -45,7 +45,7 @@ public class CommentController {
 
     @PreAuthorize("hasAuthority('admin:comment')")
     @ApiOperation("根据文章ID获取评论列表")
-    @Log("根据文章ID获取评论列表")
+    //@Log("根据文章ID获取评论列表")
     @GetMapping("/list")
     ResultBean list(@ApiParam(name="articleId", value = "评论所处文章id") Long articleId) {
         CommentDO commentDO=new CommentDO();
@@ -85,8 +85,8 @@ public class CommentController {
      * @return
      */
     //@PreAuthorize("hasAuthority('admin:comment')")
-    @ApiOperation("增加评论")
-    @Log("增加评论")
+    @ApiOperation("发表评论")
+    @Log("发表评论")
     @PostMapping()
     ResultBean save(@ApiParam(name="commentDTO", value = "评论相关信息") @RequestBody CommentDTO commentDTO) {
         commentDTO.setLikeNum(ToolUtils.intToLong(0));
@@ -128,7 +128,7 @@ public class CommentController {
      * @return
      */
     @ApiOperation("根据页面关闭后评论点赞的变更情况更新数据库")
-    @Log("根据页面关闭后评论点赞的变更情况更新数据库")
+    //@Log("根据页面关闭后评论点赞的变更情况更新数据库")
     @PutMapping("updateLikeNum")
     ResultBean updateLikeNum(@ApiParam(name="commentDTO", value = "评论相关信息") @RequestBody List<UserCommentDTO> userCommentDTOS) {
         for(UserCommentDTO userCommentDTO:userCommentDTOS){
