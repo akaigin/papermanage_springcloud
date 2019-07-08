@@ -56,13 +56,19 @@
 ### 系统截图
 ![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/login.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/dashboard.png)
-
 ![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/info.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/studentList.png)
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/blob/master/asserts/articleCreate.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/role.png)
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/roles.png)
 
-![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/plan.png)
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/tree/master/asserts/userList.png)
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/blob/master/asserts/article.png)
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/blob/master/asserts/comment.png)
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/blob/master/asserts/log.png)
+
+![输入图片说明](https://github.com/akaigin/papermanage_springcloud/blob/master/asserts/reportCheck.png)
 
